@@ -785,16 +785,17 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     };
 
     try {
-      await emailjs.send("service_7fllg63", "template_2vgl1ty", params);
-      document.getElementById('submitFormWrap').style.display = 'none';
-      document.getElementById('submitSuccess').style.display  = 'block';
-      window.scrollTo(0, 0);
-    } catch (err) {
-      console.error('EmailJS error:', err);
-      btn.textContent = 'Send My Story →';
-      btn.disabled = false;
-      alert('Something went wrong. Please try again or email us at calledstories@gmail.com');
-    }
+  await emailjs.send("service_7fllg63", "template_2vgl1ty", params);
+  await emailjs.send("service_7fllg63", "template_jup5wza", params);
+  document.getElementById('submitFormWrap').style.display = 'none';
+  document.getElementById('submitSuccess').style.display  = 'block';
+  window.scrollTo(0, 0);
+} catch (err) {
+  console.error('EmailJS error:', err);
+  btn.textContent = 'Send My Story →';
+  btn.disabled = false;
+  alert('Something went wrong. Please try again or email us at calledstories@gmail.com');
+}
   }
 
   document.getElementById('todayDate').textContent =
