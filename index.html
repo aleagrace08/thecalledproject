@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>White Coat Chronicles — Why Medicine?</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════════════ -->
+<nav>
+  <div class="logo" onclick="showPage('home')">Called<span>.</span></div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')">Home</a></li>
+    <li><a onclick="showPage('stories')">Stories</a></li>
+    <li><a onclick="showPage('journal')">Founder's Journal</a></li>
+    <li><a onclick="showPage('donate')">Donate</a></li>
+    <li><a onclick="showPage('submit')">Submit</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:0.75rem;">
+    <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" aria-label="Toggle dark mode">
+      <span id="darkIcon">🌙</span>
+    </button>
+    <button class="nav-cta" onclick="showPage('stories')">Read Stories</button>
+  </div>
+</nav>
+
+<!-- ═══ HOME PAGE ═════════════════════════════════════════════════ -->
+<div id="home" class="page active">
+
+  <section class="hero">
+    <div class="hero-left">
+      <span class="hero-tag" style="font-size:16px;">✦ Stories of Purpose</span>
+      <h1 style="font-size:80px;">Why did you get<br><em>called</em> to this?</h1>
+      <p style="font-size:18px;">Real people. Real moments. The fascinating stories behind why doctors, artists, lawyers, and many others chose their path — told in their own words.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" style="font-size:18px;" onclick="showPage('stories')">Read This Week's Story</button>
+        <button class="btn-secondary" style="font-size:18px;" onclick="showPage('donate')">Support a Cause ♥</button>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="scene-bg"></div>
+
+      <div class="newspaper">
+        <div class="np-inner">
+          <div class="np-masthead">
+            <span class="np-nameplate">White Coat Chronicles</span>
+            <div class="np-edition-row">
+              <span>Vol. I … No. 1</span>
+              <span class="np-edition-center">The Journal of Medical Callings</span>
+              <span>Est. 2025 · Free</span>
+            </div>
+          </div>
+          <div class="np-head-main">"A Patient Squeezed My Hand<br>And I Never Looked Back"</div>
+          <div class="np-head-sub">Dr. Reyna Castellanos on the Tuesday night that changed everything</div>
+          <div class="np-rule-thick"></div>
+          <div class="np-cols-3" style="margin-top:5px;">
+            <div>
+              <div class="np-photo" style="height:52px;border-radius:1px;">
+                <span style="font-size:1.4rem;">🩺</span>
+              </div>
+              <div class="np-photo-caption">Dr. Castellanos, Houston ER, 2024</div>
+              <div class="np-lines" style="margin-top:4px;">
+                <span class="np-dropcap">S</span>
+                <div class="np-line w90"></div>
+                <div class="np-line w90"></div>
+                <div class="np-line w75"></div>
+                <div class="np-line w90"></div>
+                <div class="np-line w60"></div>
+              </div>
+            </div>
+            <div class="np-col-divider"></div>
+            <div>
+              <div class="np-col-label">Medicine</div>
+              <div class="np-head-col">She nearly chose architecture. Then, bay four.</div>
+              <div class="np-lines">
+                <div class="np-line w90"></div>
+                <div class="np-line w90"></div>
+                <div class="np-line w75"></div>
+                <div class="np-line w90"></div>
+                <div class="np-line w45"></div>
+                <div class="np-line w90"></div>
+                <div class="np-line w60"></div>
+              </div>
+            </div>
+            <div class="np-col-divider"></div>
+            <div>
+              <div class="np-col-label">Inside</div>
+              <div class="np-index">
+                <div class="np-index-title">Also in this issue</div>
+                <div class="np-index-row"><span>Cardiologist</span><span>A2</span></div>
+                <div class="np-index-row"><span>Pediatrician</span><span>B1</span></div>
+                <div class="np-index-row"><span>Neurologist</span><span>C3</span></div>
+                <div class="np-index-row"><span>Radiologist</span><span>D1</span></div>
+              </div>
+              <div class="np-rule" style="margin-top:5px;"></div>
+              <div class="np-head-col" style="margin-top:4px;font-size:0.44rem;">Donate to Dr. Castellanos' chosen charity: Doctors Without Borders</div>
+              <div class="np-lines" style="margin-top:3px;">
+                <div class="np-line w90"></div>
+                <div class="np-line w75"></div>
+                <div class="np-line w45"></div>
+              </div>
+            </div>
+          </div>
+          <div class="np-rule-double" style="margin-top:6px;"></div>
+          <div class="np-col-2" style="margin-top:5px;">
+            <div>
+              <div class="np-col-label">Next Week</div>
+              <div class="np-head-col">The Cardiologist Who Survived His Own Heart Attack</div>
+              <div class="np-lines">
+                <div class="np-line w90"></div>
+                <div class="np-line w75"></div>
+                <div class="np-line w60"></div>
+              </div>
+            </div>
+            <div class="np-col-divider"></div>
+            <div>
+              <div class="np-col-label">Opinion</div>
+              <div class="np-head-col">Why We Don't Talk About Our Callings</div>
+              <div class="np-lines">
+                <div class="np-line w90"></div>
+                <div class="np-line w60"></div>
+                <div class="np-line w45"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="float-item item-stethoscope">
+        <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(2px 3px 5px rgba(0,0,0,0.22))">
+          <path d="M30 10 Q30 60 70 75 Q110 90 115 120" stroke="#2A2A2A" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+          <path d="M58 10 Q58 55 70 75" stroke="#2A2A2A" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+          <circle cx="30" cy="10" r="6" fill="#1A1A1A"/>
+          <circle cx="58" cy="10" r="6" fill="#1A1A1A"/>
+          <circle cx="115" cy="122" r="13" fill="#2A2A2A" stroke="#111" stroke-width="1.5"/>
+          <circle cx="115" cy="122" r="8" fill="#444"/>
+          <circle cx="115" cy="122" r="3.5" fill="#888"/>
+          <path d="M32 12 Q32 55 70 70" stroke="rgba(255,255,255,0.18)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="float-item item-syringe">
+        <svg viewBox="0 0 160 55" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-28deg);filter:drop-shadow(1px 2px 4px rgba(0,0,0,0.2))">
+          <rect x="30" y="16" width="90" height="22" rx="5" fill="#E8E8E8" stroke="#AAAAAA" stroke-width="1.5"/>
+          <line x1="50"  y1="17" x2="50"  y2="38" stroke="#BBBBBB" stroke-width="1"/>
+          <line x1="68"  y1="17" x2="68"  y2="38" stroke="#BBBBBB" stroke-width="1"/>
+          <line x1="86"  y1="17" x2="86"  y2="38" stroke="#BBBBBB" stroke-width="1"/>
+          <line x1="104" y1="17" x2="104" y2="38" stroke="#BBBBBB" stroke-width="1"/>
+          <rect x="118" y="14" width="6"  height="27" rx="2" fill="#CCCCCC" stroke="#AAAAAA" stroke-width="1"/>
+          <rect x="122" y="10" width="14" height="35" rx="3" fill="#DDDDDD" stroke="#BBBBBB" stroke-width="1"/>
+          <rect x="32"  y="18" width="50" height="18" rx="3" fill="rgba(180,210,255,0.55)"/>
+          <rect x="18"  y="19" width="14" height="16" rx="2" fill="#BBBBBB" stroke="#999" stroke-width="1"/>
+          <line x1="4"  y1="27" x2="18" y2="27" stroke="#999999" stroke-width="2.5" stroke-linecap="round"/>
+          <ellipse cx="4" cy="27" rx="3" ry="4" fill="#CCCCCC" stroke="#AAAAAA" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <div class="float-item item-rxpad">
+        <svg viewBox="0 0 70 88" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(8deg);filter:drop-shadow(1px 2px 4px rgba(0,0,0,0.15))">
+          <rect x="2" y="2" width="66" height="84" rx="4" fill="#FFFDF8" stroke="#DDDDCC" stroke-width="1.5"/>
+          <rect x="2" y="2" width="66" height="16" rx="4" fill="#4A7C6B"/>
+          <text x="35" y="14" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="10" font-weight="bold">℞</text>
+          <line x1="10" y1="30" x2="60" y2="30" stroke="#CCC" stroke-width="1.2"/>
+          <line x1="10" y1="40" x2="60" y2="40" stroke="#CCC" stroke-width="1.2"/>
+          <line x1="10" y1="50" x2="55" y2="50" stroke="#CCC" stroke-width="1.2"/>
+          <line x1="10" y1="60" x2="58" y2="60" stroke="#CCC" stroke-width="1.2"/>
+          <line x1="10" y1="70" x2="45" y2="70" stroke="#CCC" stroke-width="1.2"/>
+        </svg>
+      </div>
+
+      <div class="float-item item-ecg">
+        <svg viewBox="0 0 120 36" xmlns="http://www.w3.org/2000/svg" style="transform:rotate(-6deg);filter:drop-shadow(1px 1px 3px rgba(0,0,0,0.18))">
+          <rect x="0" y="0" width="120" height="36" rx="4" fill="#FFFDF6" stroke="#E0D8C0" stroke-width="1.2"/>
+          <line x1="0"  y1="12" x2="120" y2="12" stroke="#FFD0D0" stroke-width="0.6"/>
+          <line x1="0"  y1="24" x2="120" y2="24" stroke="#FFD0D0" stroke-width="0.6"/>
+          <line x1="30" y1="0"  x2="30"  y2="36" stroke="#FFD0D0" stroke-width="0.6"/>
+          <line x1="60" y1="0"  x2="60"  y2="36" stroke="#FFD0D0" stroke-width="0.6"/>
+          <line x1="90" y1="0"  x2="90"  y2="36" stroke="#FFD0D0" stroke-width="0.6"/>
+          <polyline points="5,18 18,18 22,18 25,6 28,30 31,18 38,18 42,18 45,14 48,22 51,18 60,18 68,18 71,6 74,30 77,18 84,18 90,18 94,14 97,22 100,18 115,18" fill="none" stroke="#C1684A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="float-item star-tag">This week's story ✦</div>
+      <div class="float-item pill-tag">Cardiology · Neuro · Peds · Radiology</div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="section-label">
+      <span>Featured Story</span>
+      <div class="section-label-line"></div>
+    </div>
+    <div class="feature-card">
+      <div>
+        <span class="feature-badge" style="font-size:16px;">Story of the Week</span>
+        <h2 style="font-size:30px;">"A patient squeezed my hand and I never looked back"</h2>
+        <div class="author-row">
+          <div class="avatar" style="font-size:16px;">DR</div>
+          <div class="author-info">
+            <div class="author-name" style="font-size:16px;">Dr. Reyna Castellanos</div>
+            <div class="author-meta" style="font-size:14px;">Emergency Physician · Houston, TX</div>
+          </div>
+        </div>
+        <p style="font-size:16px;color:#78716C;line-height:1.7;margin-bottom:1rem;">She was pre-med because her mother wanted her to be. Then, at 22, a single moment in a volunteer shift changed everything — and she realized being called to medicine wasn't her mother's dream. It was hers.</p>
+        <button class="read-btn" style="font-size:18px;" onclick="showPage('article')">Read Full Story →</button>
+      </div>
+      <div class="feature-img">🩺</div>
+    </div>
+  </section>
+
+  <section class="stories">
+    <div class="section-label">
+      <span>More Stories</span>
+      <div class="section-label-line"></div>
+    </div>
+    <div class="story-grid">
+      <div class="story-card" onclick="showPage('article')">
+        <div class="card-img" style="background:linear-gradient(135deg,#D4E8F5,#A8CCE8);">🫀</div>
+        <div class="card-body">
+          <span class="card-tag">Cardiology</span>
+          <div class="card-title">"I survived my own heart attack. That's why I became a cardiologist."</div>
+          <div class="card-meta"><span>Dr. James Okafor · Cardiologist</span><span class="read-time">5 min read</span></div>
+        </div>
+      </div>
+      <div class="story-card" onclick="showPage('article')">
+        <div class="card-img sand-bg">👶</div>
+        <div class="card-body">
+          <span class="card-tag">Pediatrics</span>
+          <div class="card-title">"My little brother's diagnosis sent me to med school"</div>
+          <div class="card-meta"><span>Dr. Priya Sharma · Pediatrician</span><span class="read-time">4 min read</span></div>
+        </div>
+      </div>
+      <div class="story-card" onclick="showPage('article')">
+        <div class="card-img lavender-bg">🧠</div>
+        <div class="card-body">
+          <span class="card-tag">Neurology</span>
+          <div class="card-title">"The brain is the last great mystery. I had to explore it."</div>
+          <div class="card-meta"><span>Dr. Lin Chen · Neurologist</span><span class="read-time">7 min read</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="newsletter-banner">
+    <div class="nl-copy">
+      <h2 style="font-size:30px;">One story, every week.</h2>
+      <p style="font-size:16px;">Subscribe and we'll send you the next person's story the moment it drops.</p>
+    </div>
+    <div class="nl-form" id="nlForm">
+      <input type="email" class="nl-input" placeholder="your@email.com" id="nlEmail" />
+      <button class="nl-btn" style="font-size:16px;" onclick="subscribeNewsletter()">Subscribe</button>
+    </div>
+    <div class="nl-success" id="nlSuccess">✓ You're on the list!</div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo" style="cursor:default;color:var(--cream);font-size:35px;">Called<span>.</span></div>
+      <p style="font-size:16px;">Stories of purpose, told by the people actually living them. One specialty at a time.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li onclick="showPage('stories')">All Stories</li>
+        <li onclick="showPage('donate')">Donate</li>
+        <li onclick="showPage('journal')">Founder's Journal</li>
+        <li onclick="showPage('submit')">Submit Your Story</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li>Newsletter</li>
+        <li>Instagram</li>
+        <li>TikTok</li>
+        <li>Contact Us</li>
+      </ul>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══ STORIES PAGE ══════════════════════════════════════════════ -->
+<div id="stories" class="page">
+  <div class="stories-page">
+    <div style="text-align:center;margin-bottom:2.5rem;">
+      <span style="font-size:0.7rem;font-weight:600;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:0.5rem;">Archive</span>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.4rem;margin:0.5rem 0;">Every story, every calling</h1>
+      <p style="color:var(--muted);font-size:0.95rem;">Browse by specialty.</p>
+    </div>
+    <div style="display:flex;gap:0.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:2.5rem;" id="filterRow">
+      <span class="filter-pill active" onclick="filterStories('all',this)">All</span>
+      <span class="filter-pill" onclick="filterStories('ER',this)">ER 🚨</span>
+      <span class="filter-pill" onclick="filterStories('Cardiology',this)">Cardiology 🫀</span>
+      <span class="filter-pill" onclick="filterStories('Pediatrics',this)">Pediatrics 👶</span>
+      <span class="filter-pill" onclick="filterStories('Neurology',this)">Neurology 🧠</span>
+      <span class="filter-pill" onclick="filterStories('Radiology',this)">Radiology 🔬</span>
+      <span class="filter-pill" onclick="filterStories('Psychiatry',this)">Psychiatry 💬</span>
+    </div>
+    <div class="story-grid" id="storyGrid">
+      <div class="story-card" data-specialty="ER" onclick="showPage('article')">
+        <div class="card-img" style="background:linear-gradient(135deg,#F9E0D4,#E8C4B8);">🩺</div>
+        <div class="card-body"><span class="card-tag">ER</span><div class="card-title">"A patient squeezed my hand and I never looked back"</div><div class="card-meta"><span>Dr. Reyna Castellanos</span><span class="read-time">6 min read</span></div></div>
+      </div>
+      <div class="story-card" data-specialty="Cardiology" onclick="showPage('article')">
+        <div class="card-img" style="background:linear-gradient(135deg,#D4E8F5,#A8CCE8);">🫀</div>
+        <div class="card-body"><span class="card-tag">Cardiology</span><div class="card-title">"I survived my own heart attack. That's why I became a cardiologist."</div><div class="card-meta"><span>Dr. James Okafor</span><span class="read-time">5 min read</span></div></div>
+      </div>
+      <div class="story-card" data-specialty="Pediatrics" onclick="showPage('article')">
+        <div class="card-img sand-bg">👶</div>
+        <div class="card-body"><span class="card-tag">Pediatrics</span><div class="card-title">"My little brother's diagnosis sent me to med school"</div><div class="card-meta"><span>Dr. Priya Sharma</span><span class="read-time">4 min read</span></div></div>
+      </div>
+      <div class="story-card" data-specialty="Neurology" onclick="showPage('article')">
+        <div class="card-img lavender-bg">🧠</div>
+        <div class="card-body"><span class="card-tag">Neurology</span><div class="card-title">"The brain is the last great mystery. I had to explore it."</div><div class="card-meta"><span>Dr. Lin Chen</span><span class="read-time">7 min read</span></div></div>
+      </div>
+      <div class="story-card" data-specialty="Radiology" onclick="showPage('article')">
+        <div class="card-img" style="background:linear-gradient(135deg,#E8EDF5,#C5D0E0);">🔬</div>
+        <div class="card-body"><span class="card-tag">Radiology</span><div class="card-title">"I see things no one else sees. That power felt like a calling."</div><div class="card-meta"><span>Dr. Marco Reyes</span><span class="read-time">5 min read</span></div></div>
+      </div>
+      <div class="story-card" data-specialty="Psychiatry" onclick="showPage('article')">
+        <div class="card-img" style="background:linear-gradient(135deg,#D4E8D1,#9FE1CB);">💬</div>
+        <div class="card-body"><span class="card-tag">Psychiatry</span><div class="card-title">"My own breakdown became my purpose"</div><div class="card-meta"><span>Dr. Theo Williams</span><span class="read-time">8 min read</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ JOURNAL PAGE ═══════════════════════════════════════════════ -->
+<div id="journal" class="page">
+  <div class="journal-page">
+    <h1>Founder's Journal ✦</h1>
+    <p class="subtitle">Unfiltered thoughts on building Called. — the stories behind the stories.</p>
+    <div class="journal-compose">
+      <input type="text" placeholder="Entry title…" id="journalTitle" />
+      <textarea placeholder="Write your thoughts here…" id="journalBody"></textarea>
+      <div class="compose-footer">
+        <span class="compose-date" id="todayDate"></span>
+        <button class="save-btn" onclick="saveEntry()">Save Entry</button>
+      </div>
+    </div>
+    <div id="journalEntries">
+      <div class="entry-card">
+        <div class="entry-date">May 28, 2025</div>
+        <div class="entry-title">Why I started this</div>
+        <div class="entry-body">I was sitting across from my doctor during a routine checkup and she mentioned — almost in passing — that she almost became an architect. Something in me lit up. I wanted to know everything. The pivot, the moment, the doubt. That's when I knew White Coat Chronicles needed to exist.</div>
+        <div class="entry-mood">🌱</div>
+      </div>
+      <div class="entry-card">
+        <div class="entry-date">June 3, 2025</div>
+        <div class="entry-title">First interview jitters</div>
+        <div class="entry-body">I interviewed Dr. Reyna today for the first story. I was so nervous I spilled my coffee before we even started. She was incredibly gracious — and by the end I was genuinely moved. She cried talking about her first patient. I cried a little too. This is working.</div>
+        <div class="entry-mood">🥹</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DONATE PAGE ═══════════════════════════════════════════════ -->
+<div id="donate" class="page">
+  <div class="donate-page">
+    <div class="donate-hero">
+      <span style="font-size:0.7rem;font-weight:600;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:0.5rem;">Give Back</span>
+      <h1>Donate to this week's cause</h1>
+      <p>Every week, the physician who shares their story chooses a charity close to their heart. We amplify it here — because purpose doesn't end with the story.</p>
+    </div>
+    <div class="charity-spotlight">
+      <div class="charity-icon">🏥</div>
+      <div class="charity-info">
+        <span class="charity-tag">Dr. Reyna's Pick · This Week</span>
+        <h3>Doctors Without Borders</h3>
+        <p>Reyna chose MSF because it represents medicine as she believes it should be — driven purely by need. "No insurance forms, no billing. Just care. That's why I became a doctor."</p>
+        <span class="charity-tag" style="color:var(--terracotta);">msf.org · Doctors Without Borders</span>
+      </div>
+    </div>
+    <div class="amount-grid" id="amounts">
+      <div class="amount-btn selected" onclick="selectAmount(this)"><div class="amt">$10</div><div class="sub">small spark</div></div>
+      <div class="amount-btn" onclick="selectAmount(this)"><div class="amt">$25</div><div class="sub">rising flame</div></div>
+      <div class="amount-btn" onclick="selectAmount(this)"><div class="amt">$50</div><div class="sub">bright light</div></div>
+      <div class="amount-btn" onclick="selectAmount(this)"><div class="amt">$100</div><div class="sub">blazing</div></div>
+    </div>
+    <button class="donate-cta" onclick="handleDonate()">Donate to Doctors Without Borders ♥</button>
+    <div class="past-charities">
+      <h3>Past weeks' causes</h3>
+      <div class="past-row"><div class="past-emoji">🫀</div><div class="past-info"><div class="pname">American Heart Association</div><div class="pwho">Chosen by Dr. James Okafor · Cardiologist</div></div><div class="past-raised">$2,340 raised</div></div>
+      <div class="past-row"><div class="past-emoji">👶</div><div class="past-info"><div class="pname">St. Jude Children's Research Hospital</div><div class="pwho">Chosen by Dr. Priya Sharma · Pediatrician</div></div><div class="past-raised">$1,870 raised</div></div>
+      <div class="past-row"><div class="past-emoji">🧠</div><div class="past-info"><div class="pname">Brain &amp; Behavior Research Foundation</div><div class="pwho">Chosen by Dr. Lin Chen · Neurologist</div></div><div class="past-raised">$940 raised</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ARTICLE PAGE ══════════════════════════════════════════════ -->
+<div id="article" class="page">
+  <div class="article-page">
+    <button class="back-btn" onclick="showPage('home')">← Back to stories</button>
+    <div class="article-kicker">Emergency Medicine · ER Physician · Houston, TX</div>
+    <h1>"A patient squeezed my hand and I never looked back"</h1>
+    <div class="article-byline">
+      <div class="avatar">DR</div>
+      <div>
+        <div class="author-name" style="font-weight:600;font-size:0.9rem;">Dr. Reyna Castellanos</div>
+        <div style="font-size:0.8rem;color:var(--muted);">As told to White Coat Chronicles · Published June 2025 · 6 min read</div>
+      </div>
+    </div>
+    <div class="article-img">🩺</div>
+    <div class="article-body">
+      <p class="drop-cap">I was a pre-med student because my mother was a nurse and she wanted more for me. Not better — more. She would say that with a straight face and I believed her. Medicine was never my dream. It was hers, handed to me like something I was supposed to carry.</p>
+      <p>Junior year of college, I signed up to volunteer at a county hospital on Tuesday nights. I nearly didn't go the first night — I had a paper due. But something made me go.</p>
+      <div class="pullquote"><p>"She didn't say anything. She just reached out and held my hand. And in that moment I thought: this is it. This is the whole thing."</p></div>
+      <p>There was an elderly woman in bay four, alone. Her family lived in another state. She'd had a fall. I sat with her for almost two hours. I held a cup of water to her lips. She didn't say anything. She just reached out and held my hand. And in that moment I thought: this is it. This is the whole thing. Not the salary, not the prestige. This.</p>
+      <p>I walked out of that hospital at midnight, stood under the parking lot lights, and called my mom. I told her I wanted to be a doctor. She said, "I know, mija. I've always known." She was right. She was just waiting for me to figure it out.</p>
+      <p>Fifteen years later, I run an ER. Every Tuesday, I still think about bay four.</p>
+    </div>
+    <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--sand);">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <div style="font-size:0.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.4rem;">Dr. Reyna's Chosen Charity</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.1rem;">Doctors Without Borders</div>
+        </div>
+        <button class="read-btn" onclick="showPage('donate')" style="background:var(--terracotta);">Donate ♥</button>
+      </div>
+    </div>
+    <div style="margin-top:2rem;">
+      <button class="btn-secondary" onclick="showPage('stories')" style="font-size:0.85rem;">← More Stories</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SUBMIT PAGE ═══════════════════════════════════════════════ -->
+<div id="submit" class="page">
+  <div class="submit-page">
+    <h1>Share Your Story</h1>
+    <p class="subtitle" style="font-size:16px;">We'd love to hear why you chose your profession. Every week, one person's story is featured — plus a spotlight on the charity they care most about. Submissions are reviewed within a week.</p>
+
+    <div class="progress-steps">
+      <div class="step active" id="step1">
+        <div class="step-dot">1</div>
+        <div class="step-label">You</div>
+      </div>
+      <div class="step" id="step2">
+        <div class="step-dot">2</div>
+        <div class="step-label">Story</div>
+      </div>
+      <div class="step" id="step3">
+        <div class="step-dot">3</div>
+        <div class="step-label">Charity</div>
+      </div>
+    </div>
+
+    <div id="submitForm">
+      <div class="form-section" id="formStep1">
+        <h3><span>👤</span> About You</h3>
+        <div class="field-group">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" placeholder="Reyna" id="fname" />
+          </div>
+          <div class="field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Castellanos" id="lname" />
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field">
+            <label>Specialty</label>
+            <select id="specialty">
+              <option value="">Select specialty…</option>
+              <option>Emergency Medicine</option>
+              <option>Cardiology</option>
+              <option>Pediatrics</option>
+              <option>Neurology</option>
+              <option>Radiology</option>
+              <option>Psychiatry</option>
+              <option>Internal Medicine</option>
+              <option>Surgery</option>
+              <option>Oncology</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Location (City, State)</label>
+            <input type="text" placeholder="Houston, TX" id="location" />
+          </div>
+        </div>
+        <div class="field-group full">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" id="semail" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section" id="formStep2">
+        <h3><span>✍️</span> Your Story</h3>
+        <div class="field-group full">
+          <div class="field">
+            <label>Story Headline</label>
+            <input type="text" placeholder='"The moment I knew medicine was my calling…"' id="storyTitle" />
+          </div>
+        </div>
+        <div class="field-group full">
+          <div class="field">
+            <label>Tell us your story</label>
+            <textarea placeholder="In your own words — the moment, the person, the feeling that made you choose your profession. There are no wrong answers." id="storyBody" rows="8" oninput="updateCharCount(this)"></textarea>
+            <div class="char-count" id="charCount">0 / 1500 characters</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section" id="formStep3">
+        <h3><span>♥</span> Your Chosen Charity</h3>
+        <p style="font-size:0.88rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6;">When your story is featured, we'll spotlight the charity you care most about. This can be any cause — it doesn't have to be medical.</p>
+        <div class="field-group">
+          <div class="field">
+            <label>Charity Name</label>
+            <input type="text" placeholder="Doctors Without Borders" id="charityName" />
+          </div>
+          <div class="field">
+            <label>Charity Website</label>
+            <input type="url" placeholder="https://msf.org" id="charityUrl" />
+          </div>
+        </div>
+        <div class="field-group full">
+          <div class="field">
+            <label>Why this charity?</label>
+            <textarea placeholder="Why is this cause meaningful to you?" id="charityWhy" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="consent-row">
+          <input type="checkbox" id="consent" />
+          <label for="consent" style="font-size:16px;">I give Called. permission to edit my submission for length and clarity, and to publish it on this website and related social channels.</label>
+        </div>
+      </div>
+
+      <button class="submit-form-btn" onclick="submitStory()">Submit My Story →</button>
+    </div>
+
+    <div class="submit-success" id="submitSuccess">
+      <div class="big-icon">🩺</div>
+      <h2>Thank you, Doctor.</h2>
+      <p>Your story has been received. We'll read every word carefully and be in touch within two weeks. Medicine is better because people like you chose it.</p>
+      <button class="read-btn" onclick="showPage('home')" style="display:inline-block;">Back to Home</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
