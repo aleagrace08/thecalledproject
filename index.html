@@ -252,6 +252,40 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   .nl-form { flex-direction: column; width: 100%; }
   .nl-input { width: 100%; }
 }
+/* ADMIN */
+.admin-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--ink); color: var(--white); padding: 0.75rem 2rem; display: none; align-items: center; gap: 1rem; z-index: 999; border-top: 2px solid var(--terracotta); }
+.admin-bar span { font-size: 0.8rem; color: #A8A29E; }
+.admin-btn { background: var(--terracotta); color: var(--white); border: none; padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.admin-btn.secondary { background: #2C2927; }
+.admin-login { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; }
+.admin-login-box { background: var(--white); border-radius: 20px; padding: 2.5rem; width: 340px; text-align: center; }
+.admin-login-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.4rem; }
+.admin-login-box p { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
+.admin-login-box input { width: 100%; font-family: 'DM Sans', sans-serif; font-size: 0.92rem; border: 1.5px solid var(--sand); border-radius: 10px; padding: 0.7rem 0.95rem; outline: none; margin-bottom: 1rem; }
+.admin-login-box input:focus { border-color: var(--terracotta); }
+.admin-login-box button { width: 100%; background: var(--terracotta); color: var(--white); border: none; padding: 0.75rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.admin-panel { display: none; position: fixed; inset: 0; background: var(--cream); z-index: 998; overflow-y: auto; padding: 2rem 2.5rem; }
+.admin-panel h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.25rem; }
+.admin-panel .admin-sub { color: var(--muted); font-size: 0.88rem; margin-bottom: 2rem; }
+.admin-story-form { background: var(--white); border-radius: 20px; border: 1px solid var(--sand); padding: 2rem; margin-bottom: 2rem; }
+.admin-story-form h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 1.25rem; }
+.admin-field { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+.admin-field label { font-size: 0.75rem; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+.admin-field input, .admin-field textarea, .admin-field select { font-family: 'DM Sans', sans-serif; font-size: 0.92rem; color: var(--ink); border: 1.5px solid var(--sand); border-radius: 10px; padding: 0.7rem 0.95rem; background: var(--cream); outline: none; transition: border-color 0.2s; width: 100%; }
+.admin-field input:focus, .admin-field textarea:focus, .admin-field select:focus { border-color: var(--terracotta); background: var(--white); }
+.admin-field textarea { resize: vertical; min-height: 100px; line-height: 1.65; }
+.admin-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.admin-publish-btn { background: var(--terracotta); color: var(--white); border: none; padding: 0.75rem 2rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.admin-stories-list { background: var(--white); border-radius: 20px; border: 1px solid var(--sand); padding: 2rem; }
+.admin-stories-list h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 1.25rem; }
+.admin-story-row { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-radius: 12px; border: 1px solid var(--sand); margin-bottom: 0.75rem; }
+.admin-story-row .asr-info { flex: 1; }
+.admin-story-row .asr-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+.admin-story-row .asr-meta { font-size: 0.78rem; color: var(--muted); }
+.admin-story-row .asr-actions { display: flex; gap: 0.5rem; }
+.asr-edit { background: var(--ink); color: var(--white); border: none; padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.asr-delete { background: #FEE2E2; color: #DC2626; border: none; padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.admin-empty { color: var(--muted); font-size: 0.88rem; text-align: center; padding: 2rem; }
 </style>
 </head>
 <body>
@@ -800,6 +834,284 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 
   document.getElementById('todayDate').textContent =
     new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+// ── ADMIN ──────────────────────────────────────────────
+const ADMIN_PASSWORD = "called2025"; // change this to whatever you want
+
+let stories = JSON.parse(localStorage.getItem('called_stories') || '[]');
+
+function renderAdminStoriesList() {
+  const list = document.getElementById('adminStoriesList');
+  if (stories.length === 0) {
+    list.innerHTML = '<p class="admin-empty">No stories yet. Add one above.</p>';
+    return;
+  }
+  list.innerHTML = stories.map((s, i) => `
+    <div class="admin-story-row">
+      <div style="font-size:1.5rem;">${s.emoji}</div>
+      <div class="asr-info">
+        <div class="asr-title">${s.title}</div>
+        <div class="asr-meta">${s.name} · ${s.field}</div>
+      </div>
+      <div class="asr-actions">
+        <button class="asr-edit" onclick="adminEditStory(${i})">Edit</button>
+        <button class="asr-delete" onclick="adminDeleteStory(${i})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function adminSaveStory() {
+  const idx = parseInt(document.getElementById('a-editing-index').value);
+  const story = {
+    name:       document.getElementById('a-name').value.trim(),
+    meta:       document.getElementById('a-meta').value.trim(),
+    field:      document.getElementById('a-field').value,
+    emoji:      document.getElementById('a-emoji').value.trim() || '✦',
+    title:      document.getElementById('a-title').value.trim(),
+    body:       document.getElementById('a-body').value.trim(),
+    charity:    document.getElementById('a-charity').value.trim(),
+    charityUrl: document.getElementById('a-charity-url').value.trim(),
+    charityWhy: document.getElementById('a-charity-why').value.trim(),
+  };
+  if (!story.name || !story.title || !story.body) {
+    alert('Name, title, and story body are required.');
+    return;
+  }
+  if (idx === -1) {
+    stories.unshift(story);
+  } else {
+    stories[idx] = story;
+    document.getElementById('a-editing-index').value = -1;
+    document.getElementById('adminFormTitle').textContent = '✦ Add New Story';
+  }
+  localStorage.setItem('called_stories', JSON.stringify(stories));
+  renderAdminStoriesList();
+  renderPublicStories();
+  adminClearForm();
+}
+
+function adminEditStory(i) {
+  const s = stories[i];
+  document.getElementById('a-editing-index').value = i;
+  document.getElementById('a-name').value        = s.name;
+  document.getElementById('a-meta').value        = s.meta;
+  document.getElementById('a-field').value       = s.field;
+  document.getElementById('a-emoji').value       = s.emoji;
+  document.getElementById('a-title').value       = s.title;
+  document.getElementById('a-body').value        = s.body;
+  document.getElementById('a-charity').value     = s.charity;
+  document.getElementById('a-charity-url').value = s.charityUrl;
+  document.getElementById('a-charity-why').value = s.charityWhy;
+  document.getElementById('adminFormTitle').textContent = '✏️ Editing Story';
+  document.querySelector('.admin-story-form').scrollIntoView({ behavior: 'smooth' });
+}
+
+function adminDeleteStory(i) {
+  if (!confirm('Delete this story? This cannot be undone.')) return;
+  stories.splice(i, 1);
+  localStorage.setItem('called_stories', JSON.stringify(stories));
+  renderAdminStoriesList();
+  renderPublicStories();
+}
+
+function adminClearForm() {
+  ['a-name','a-meta','a-title','a-body','a-charity','a-charity-url','a-charity-why','a-emoji'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('a-field').selectedIndex = 0;
+  document.getElementById('a-editing-index').value = -1;
+  document.getElementById('adminFormTitle').textContent = '✦ Add New Story';
+}
+
+function renderPublicStories() {
+  if (stories.length === 0) return;
+  const grid = document.getElementById('storyGrid');
+  const dynamicCards = grid.querySelectorAll('.dynamic-card');
+  dynamicCards.forEach(c => c.remove());
+  stories.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'story-card dynamic-card';
+    card.dataset.specialty = s.field;
+    card.onclick = () => openDynamicArticle(s);
+    card.innerHTML = `
+      <div class="card-img" style="background:linear-gradient(135deg,var(--blush),var(--lavender));">${s.emoji}</div>
+      <div class="card-body">
+        <span class="card-tag">${s.field}</span>
+        <div class="card-title">${s.title}</div>
+        <div class="card-meta">${s.name} · ${s.meta}</div>
+      </div>`;
+    grid.prepend(card);
+  });
+}
+
+function openDynamicArticle(s) {
+  document.getElementById('dyn-kicker').textContent  = s.field + ' · ' + s.meta;
+  document.getElementById('dyn-title').textContent   = s.title;
+  document.getElementById('dyn-author').textContent  = s.name;
+  document.getElementById('dyn-meta').textContent    = s.meta;
+  document.getElementById('dyn-emoji').textContent   = s.emoji;
+  document.getElementById('dyn-body').innerHTML      = s.body.split('\n\n').map(p => `<p>${p}</p>`).join('');
+  document.getElementById('dyn-charity').textContent = s.charity;
+  document.getElementById('dyn-charity-url').textContent = s.charityUrl;
+  document.getElementById('dyn-charity-why').textContent = s.charityWhy;
+  showPage('dynArticle');
+}
+
+function adminSignIn() {
+  const pw = document.getElementById('adminPassword').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('adminLogin').style.display   = 'none';
+    document.getElementById('adminBar').style.display     = 'flex';
+    sessionStorage.setItem('called_admin', '1');
+    renderAdminStoriesList();
+  } else {
+    document.getElementById('adminLoginError').style.display = 'block';
+  }
+}
+
+function adminSignOut() {
+  sessionStorage.removeItem('called_admin');
+  document.getElementById('adminBar').style.display   = 'none';
+  document.getElementById('adminPanel').style.display = 'none';
+}
+
+function closeAdmin() {
+  document.getElementById('adminPanel').style.display = 'none';
+}
+
+// Secret key combo to open admin login: press Shift + A + D
+const adminKeys = new Set();
+document.addEventListener('keydown', e => {
+  adminKeys.add(e.key);
+  if (adminKeys.has('A') && adminKeys.has('D') && adminKeys.has('Shift')) {
+    if (!sessionStorage.getItem('called_admin')) {
+      document.getElementById('adminLogin').style.display = 'flex';
+    }
+  }
+});
+document.addEventListener('keyup', e => adminKeys.delete(e.key));
+
+// Restore admin session on refresh
+// Restore admin session on refresh
+document.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('called_admin')) {
+    document.getElementById('adminBar').style.display = 'flex';
+    renderAdminStoriesList();
+  }
+  renderPublicStories();
+});
 </script>
+
+<!-- ADMIN LOGIN OVERLAY -->
+<div class="admin-login" id="adminLogin">
+  <div class="admin-login-box">
+    <h3>Admin Access</h3>
+    <p>Enter your password to manage stories.</p>
+    <input type="password" id="adminPassword" placeholder="Password" onkeydown="if(event.key==='Enter')adminSignIn()" />
+    <button onclick="adminSignIn()">Sign In</button>
+    <p id="adminLoginError" style="color:#DC2626;font-size:0.8rem;margin-top:0.75rem;display:none;">Incorrect password.</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem;">
+    <h2>Story Manager</h2>
+    <button class="admin-btn secondary" onclick="closeAdmin()">✕ Close</button>
+  </div>
+  <p class="admin-sub">Add, edit, or remove stories. Changes show up live on the site.</p>
+
+  <div class="admin-story-form">
+    <h3 id="adminFormTitle">✦ Add New Story</h3>
+    <input type="hidden" id="a-editing-index" value="-1" />
+    <div class="admin-2col">
+      <div class="admin-field">
+        <label>Author Name</label>
+        <input type="text" id="a-name" placeholder="Dr. Reyna Castellanos" />
+      </div>
+      <div class="admin-field">
+        <label>Job Title &amp; Location</label>
+        <input type="text" id="a-meta" placeholder="ER Physician · Houston, TX" />
+      </div>
+    </div>
+    <div class="admin-2col">
+      <div class="admin-field">
+        <label>Field</label>
+        <select id="a-field">
+          <option value="" disabled selected>Select one…</option>
+          <option>Medicine</option>
+          <option>Law</option>
+          <option>Education</option>
+          <option>Tech</option>
+          <option>Arts</option>
+          <option>Culinary</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="admin-field">
+        <label>Emoji / Icon</label>
+        <input type="text" id="a-emoji" placeholder="🩺" />
+      </div>
+    </div>
+    <div class="admin-field">
+      <label>Story Title / Headline</label>
+      <input type="text" id="a-title" placeholder=""A patient squeezed my hand and I never looked back"" />
+    </div>
+    <div class="admin-field">
+      <label>Story Body</label>
+      <textarea id="a-body" style="min-height:160px;" placeholder="Paste the full story here…"></textarea>
+    </div>
+    <div class="admin-2col">
+      <div class="admin-field">
+        <label>Charity Name</label>
+        <input type="text" id="a-charity" placeholder="Doctors Without Borders" />
+      </div>
+      <div class="admin-field">
+        <label>Charity URL</label>
+        <input type="text" id="a-charity-url" placeholder="msf.org" />
+      </div>
+    </div>
+    <div class="admin-field">
+      <label>Charity Quote (why they chose it)</label>
+      <textarea id="a-charity-why" style="min-height:70px;"></textarea>
+    </div>
+    <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
+      <button class="admin-publish-btn" onclick="adminSaveStory()">Publish Story</button>
+      <button class="admin-btn secondary" onclick="adminClearForm()" style="padding:0.75rem 1.5rem;">Clear</button>
+    </div>
+  </div>
+
+  <div class="admin-stories-list">
+    <h3>Published Stories</h3>
+    <div id="adminStoriesList"></div>
+  </div>
+</div>
+
+<!-- ADMIN BAR (shown when logged in) -->
+<div class="admin-bar" id="adminBar">
+  <span>⚙ Admin Mode</span>
+  <button class="admin-btn" onclick="document.getElementById('adminPanel').style.display='block'">Manage Stories</button>
+  <button class="admin-btn secondary" onclick="adminSignOut()">Sign Out</button>
+</div>
+<div id="dynArticle" class="page">
+  <div class="article-page">
+    <button class="back-btn" onclick="showPage('stories')">← Back to stories</button>
+    <div class="article-kicker" id="dyn-kicker"></div>
+    <h1 id="dyn-title"></h1>
+    <div class="article-byline">
+      <div class="avatar" id="dyn-emoji" style="font-size:1.4rem;background:var(--blush);"></div>
+      <div>
+        <div class="author-name" style="font-weight:600;font-size:0.9rem;" id="dyn-author"></div>
+        <div style="font-size:0.8rem;color:var(--muted);" id="dyn-meta"></div>
+      </div>
+    </div>
+    <div class="article-img" id="dyn-emoji-big" style="font-size:5rem;"></div>
+    <div class="article-body" id="dyn-body"></div>
+    <div class="pullquote" style="margin-top:2rem;">
+      <p id="dyn-charity-why"></p>
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-top:0.75rem;">
+      Charity: <strong id="dyn-charity"></strong> · <span id="dyn-charity-url"></span>
+    </p>
+  </div>
+</div>
 </body>
 </html>
