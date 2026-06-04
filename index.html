@@ -690,7 +690,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
         <label for="f-consent">I understand that Called. may reach out to develop my story further, and that nothing will be published without my explicit sign-off. My contact details will never be shared.</label>
       </div>
 
-      <button class="submit-form-btn" onclick="submitStory()">Send My Story →</button>
+      <button class="submit-form-btn" id="submitBtn" onclick="submitStory()">Send My Story →</button>
     </div>
 
     <!-- Success state -->
@@ -704,64 +704,101 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-function selectAmount(el) {
-  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
-}
-function saveEntry() {
-  const title = document.getElementById('journalTitle').value.trim();
-  const body  = document.getElementById('journalBody').value.trim();
-  if (!title && !body) return;
-  const dateStr = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
-  const el = document.createElement('div');
-  el.className = 'entry-card';
-  el.innerHTML = `<div class="entry-date">${dateStr}</div><div class="entry-title">${title||'Untitled'}</div><div class="entry-body">${body||'…'}</div><div class="entry-mood">✍️</div>`;
-  document.getElementById('journalEntries').prepend(el);
-  document.getElementById('journalTitle').value = '';
-  document.getElementById('journalBody').value  = '';
-}
-function filterStories(specialty, pill) {
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  pill.classList.add('active');
-  document.querySelectorAll('#storyGrid .story-card').forEach(card => {
-    card.classList.toggle('hidden', specialty !== 'all' && card.dataset.specialty !== specialty);
-  });
-}
-function subscribeNewsletter() {
-  const val = document.getElementById('nlEmail').value.trim();
-  if (!val || !val.includes('@')) return;
-  document.getElementById('nlForm').style.display = 'none';
-  const s = document.getElementById('nlSuccess');
-  s.style.display = 'flex';
-}
-function submitStory() {
-  const required = ['f-name','f-location','f-job','f-field','f-email','f-title','f-calling','f-charity','f-charity-why'];
-  for (const id of required) {
-    const el = document.getElementById(id);
-    if (!el.value.trim()) {
-      el.style.borderColor = 'var(--terracotta)';
-      el.scrollIntoView({ behavior:'smooth', block:'center' });
-      el.focus();
+  emailjs.init("CnYxj9I6LbfqGnzy8");
+
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function selectAmount(el) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function saveEntry() {
+    const title = document.getElementById('journalTitle').value.trim();
+    const body  = document.getElementById('journalBody').value.trim();
+    if (!title && !body) return;
+    const dateStr = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+    const el = document.createElement('div');
+    el.className = 'entry-card';
+    el.innerHTML = `<div class="entry-date">${dateStr}</div><div class="entry-title">${title||'Untitled'}</div><div class="entry-body">${body||'…'}</div><div class="entry-mood">✍️</div>`;
+    document.getElementById('journalEntries').prepend(el);
+    document.getElementById('journalTitle').value = '';
+    document.getElementById('journalBody').value  = '';
+  }
+
+  function filterStories(specialty, pill) {
+    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    document.querySelectorAll('#storyGrid .story-card').forEach(card => {
+      card.classList.toggle('hidden', specialty !== 'all' && card.dataset.specialty !== specialty);
+    });
+  }
+
+  function subscribeNewsletter() {
+    const val = document.getElementById('nlEmail').value.trim();
+    if (!val || !val.includes('@')) return;
+    document.getElementById('nlForm').style.display = 'none';
+    const s = document.getElementById('nlSuccess');
+    s.style.display = 'flex';
+  }
+
+  async function submitStory() {
+    const required = ['f-name','f-location','f-job','f-field','f-email','f-title','f-calling','f-charity','f-charity-why'];
+    for (const id of required) {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) {
+        el.style.borderColor = 'var(--terracotta)';
+        el.scrollIntoView({ behavior:'smooth', block:'center' });
+        el.focus();
+        return;
+      }
+      el.style.borderColor = '';
+    }
+    if (!document.getElementById('f-consent').checked) {
+      document.querySelector('.consent-row').style.borderColor = 'var(--terracotta)';
       return;
     }
-    el.style.borderColor = '';
+
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const params = {
+      from_name:   document.getElementById('f-name').value,
+      from_email:  document.getElementById('f-email').value,
+      location:    document.getElementById('f-location').value,
+      job:         document.getElementById('f-job').value,
+      field:       document.getElementById('f-field').value,
+      contact:     document.getElementById('f-contact').value,
+      story_title: document.getElementById('f-title').value,
+      calling:     document.getElementById('f-calling').value,
+      extra:       document.getElementById('f-extra').value,
+      charity:     document.getElementById('f-charity').value,
+      charity_url: document.getElementById('f-charity-url').value,
+      charity_why: document.getElementById('f-charity-why').value,
+    };
+
+    try {
+      await emailjs.send("service_7fllg63", "template_2vgl1ty", params);
+      document.getElementById('submitFormWrap').style.display = 'none';
+      document.getElementById('submitSuccess').style.display  = 'block';
+      window.scrollTo(0, 0);
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      btn.textContent = 'Send My Story →';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again or email us at calledstories@gmail.com');
+    }
   }
-  if (!document.getElementById('f-consent').checked) {
-    document.querySelector('.consent-row').style.borderColor = 'var(--terracotta)';
-    return;
-  }
-  document.getElementById('submitFormWrap').style.display = 'none';
-  document.getElementById('submitSuccess').style.display  = 'block';
-  window.scrollTo(0,0);
-}
-document.getElementById('todayDate').textContent =
-  new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+
+  document.getElementById('todayDate').textContent =
+    new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
 </script>
 </body>
 </html>
