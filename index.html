@@ -291,8 +291,20 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 @media (max-width: 768px) {
   nav { padding: 1rem 1.25rem; }
   .nav-links { display: none; }
-  .hero { grid-template-columns: 1fr; padding: 2rem 1.25rem; min-height: unset; }
-  .hero-right { height: 420px; }
+  .hero { grid-template-columns: 1fr; padding: 2rem 1.25rem 0; gap: 0; }
+  .hero-left { padding-bottom: 2rem; }
+  .hero-right {
+    height: 75vw;
+    min-height: 320px;
+    max-height: 520px;
+    width: 100%;
+  }
+  .newspaper {
+    width: 90vw;
+    left: 50%;
+    margin-left: -45vw;
+    top: 30px;
+  }
   .feature-card { grid-template-columns: 1fr; }
   .story-grid { grid-template-columns: 1fr; }
   .amount-grid { grid-template-columns: repeat(2,1fr); }
@@ -301,6 +313,14 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   .newsletter-banner { flex-direction: column; }
   .nl-form { flex-direction: column; width: 100%; }
   .nl-input { width: 100%; }
+  .np-masthead-title { font-size: 6vw !important; }
+  .np-big-headline { font-size: 8vw !important; }
+  .np-col-hed { font-size: 1.4vw !important; }
+  .np-body-text { font-size: 1.2vw !important; }
+  .np-dropcap-big { font-size: 7vw !important; }
+  .np-meta-row { font-size: 1.2vw !important; }
+  .np-pullquote-box p { font-size: 1.2vw !important; }
+  .np-photo-cap { font-size: 1.1vw !important; }
 }
 </style>
 </head>
@@ -434,6 +454,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
       <button class="nl-btn" onclick="subscribeNewsletter()">Subscribe</button>
     </div>
     <div class="nl-success" id="nlSuccess">✦ &nbsp;You're on the list. See you next week.</div>
+    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
   </div>
 
   <footer>
@@ -815,11 +836,43 @@ function filterStories(specialty, pill) {
     card.classList.toggle('hidden', specialty !== 'all' && card.dataset.specialty !== specialty);
   });
 }
-function subscribeNewsletter() {
+async function subscribeNewsletter() {
   const val = document.getElementById('nlEmail').value.trim();
   if (!val || !val.includes('@')) return;
-  document.getElementById('nlForm').style.display = 'none';
-  document.getElementById('nlSuccess').style.display = 'flex';
+  const btn = document.querySelector('.nl-btn');
+  btn.textContent = 'Subscribing…';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://app.kit.com/forms/9526096/subscriptions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email_address: val })
+    });
+    if (res.ok || res.status === 200) {
+      document.getElementById('nlForm').style.display = 'none';
+      document.getElementById('nlSuccess').style.display = 'flex';
+    } else {
+      btn.textContent = 'Subscribe';
+      btn.disabled = false;
+      alert('Something went wrong — please try again.');
+    }
+  } catch (err) {
+    // Kit's API blocks direct fetch due to CORS, fall back to form submit
+    const form = document.createElement('form');
+    form.action = 'https://app.kit.com/forms/9526096/subscriptions';
+    form.method = 'POST';
+    form.target = '_blank';
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'email_address';
+    input.value = val;
+    form.appendChild(input);
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+    document.getElementById('nlForm').style.display = 'none';
+    document.getElementById('nlSuccess').style.display = 'flex';
+  }
 }
 document.getElementById('todayDate').textContent =
   new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
