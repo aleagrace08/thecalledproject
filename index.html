@@ -51,44 +51,59 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); }
 
 /* NEWSPAPER SCENE */
-.hero-right { position: relative; height: 540px; display: flex; align-items: center; justify-content: center; }
-.scene-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--sand) 0%, var(--blush) 100%); border-radius: 24px; opacity: 0.5; }
-.newspaper { position: absolute; width: 300px; height: 400px; background: var(--np-bg); border-radius: 2px; transform: rotate(-8deg) translateX(-20px); box-shadow: 4px 4px 0 #D4C9B0, 10px 10px 0 rgba(0,0,0,0.08), 0 2px 12px rgba(0,0,0,0.12); z-index: 3; overflow: hidden; border: 1px solid #C8BFA8; }
-.newspaper::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(0,0,0,0.018) 18px, rgba(0,0,0,0.018) 19px); pointer-events: none; z-index: 1; }
-.np-inner { padding: 12px 14px 10px; position: relative; z-index: 2; }
-.np-masthead { text-align: center; margin-bottom: 6px; }
-.np-nameplate { font-family: 'UnifrakturMaguntia', cursive; font-size: 1.45rem; color: var(--np-ink); letter-spacing: 0.01em; line-height: 1; display: block; margin-bottom: 3px; }
-.np-edition-row { display: flex; align-items: center; justify-content: space-between; font-family: Georgia, serif; font-size: 0.42rem; color: var(--np-muted); letter-spacing: 0.04em; text-transform: uppercase; border-top: 2.5px double var(--np-rule); border-bottom: 1px solid var(--np-rule); padding: 2px 0; margin-bottom: 5px; }
-.np-edition-center { font-weight: bold; font-size: 0.44rem; color: var(--np-ink); }
-.np-rule { height: 1px; background: var(--np-rule); margin: 4px 0; }
-.np-rule-double { height: 3px; border-top: 1px solid var(--np-rule); border-bottom: 1px solid var(--np-rule); margin: 4px 0; }
-.np-rule-thick { height: 2px; background: var(--np-rule); margin: 4px 0; }
-.np-cols-3 { display: grid; grid-template-columns: 1fr 1px 1fr 1px 1fr; gap: 0 6px; }
-.np-col-divider { background: #BBAA90; align-self: stretch; }
-.np-col-2 { display: grid; grid-template-columns: 1.4fr 1px 1fr; gap: 0 6px; }
-.np-head-main { font-family: Georgia, 'Times New Roman', serif; font-size: 0.78rem; font-weight: bold; line-height: 1.2; color: var(--np-ink); margin-bottom: 3px; text-align: center; border-bottom: 1px solid var(--np-rule); padding-bottom: 4px; }
-.np-head-sub { font-family: Georgia, serif; font-size: 0.55rem; font-style: italic; color: var(--np-muted); text-align: center; margin-bottom: 4px; line-height: 1.3; }
-.np-head-col { font-family: Georgia, serif; font-size: 0.52rem; font-weight: bold; color: var(--np-ink); line-height: 1.25; margin-bottom: 2px; }
-.np-col-label { font-family: Georgia, serif; font-size: 0.38rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--np-muted); border-bottom: 1px solid #BBAA90; padding-bottom: 1px; margin-bottom: 2px; }
-.np-lines { margin-top: 2px; }
-.np-line { height: 3px; background: #BBAA90; border-radius: 1px; margin-bottom: 2.5px; }
-.np-line.w90 { width: 90%; } .np-line.w75 { width: 75%; } .np-line.w60 { width: 60%; } .np-line.w45 { width: 45%; }
-.np-photo { background: linear-gradient(160deg, #D8CFBE, #BFB49E); margin: 4px 0; border: 1px solid #BBAA90; display: flex; align-items: center; justify-content: center; }
-.np-photo-caption { font-family: Georgia, serif; font-size: 0.35rem; color: var(--np-muted); text-align: center; font-style: italic; margin-top: 1px; }
-.np-dropcap { font-family: Georgia, serif; font-size: 1.4rem; font-weight: bold; float: left; line-height: 0.75; margin-right: 2px; color: var(--np-ink); }
-.np-index { border: 1px solid var(--np-rule); padding: 3px 5px; margin-top: 4px; }
-.np-index-title { font-family: Georgia, serif; font-size: 0.4rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--np-rule); margin-bottom: 2px; padding-bottom: 1px; color: var(--np-ink); }
-.np-index-row { display: flex; justify-content: space-between; font-family: Georgia, serif; font-size: 0.38rem; color: var(--np-muted); margin-bottom: 1px; }
-.np-index-row span:last-child { color: var(--np-ink); font-weight: bold; }
+.hero-right { position: relative; height: 1100px; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; }
+.scene-bg { display: none; }
 
-/* MEDICAL ITEMS */
-.float-item { position: absolute; z-index: 5; }
-.item-stethoscope { top: -18px; left: -22px; width: 140px; height: 140px; }
-.item-syringe     { bottom: 20px; right: -28px; width: 130px; height: 50px; }
-.item-rxpad       { bottom: 30px; left: -20px; width: 70px; }
-.item-ecg         { top: 24px; right: -30px; width: 120px; }
-.star-tag  { bottom: 40px; right: 60px; background: var(--sage); color: var(--white); font-size: 0.7rem; font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 100px; transform: rotate(6deg); }
-.pill-tag  { top: 100px; left: 30px; background: var(--lavender); color: #4A3F7A; font-size: 0.65rem; font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 100px; transform: rotate(-4deg); }
+/* NEWSPAPER */
+
+
+/* NEWSPAPER STYLED */
+.newspaper {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  margin-left: -240px;
+  width: 480px;
+  z-index: 4;
+  transform: rotate(-8deg);
+  transform-origin: top center;
+  box-shadow: 8px 8px 0 #C8BFA8, 18px 18px 0 rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.18);
+  overflow: visible;
+}
+.np-paper {
+  background: #EAE2CC;
+  width: 100%;
+  padding: 10px 24px 800px;
+  font-family: Georgia, serif;
+  color: #2a2219;
+  border: 2px solid #2a2219;
+}
+.np-top-rule { border-top: 4px solid #2a2219; border-bottom: 1.5px solid #2a2219; padding: 3px 0; margin-bottom: 0; }
+.np-mid-rule { border-top: 1.5px solid #2a2219; border-bottom: 4px solid #2a2219; padding: 3px 0; margin: 0; }
+.np-section-rule-top { border-top: 4px solid #2a2219; border-bottom: 1.5px solid #2a2219; padding: 3px 0; margin-bottom: 0; }
+.np-section-rule-bot { border-top: 1.5px solid #2a2219; border-bottom: 4px solid #2a2219; margin: 0 0 14px; padding: 3px 0; }
+.np-bottom-rules { border-top: 4px solid #2a2219; border-bottom: 1.5px solid #2a2219; padding: 3px 0; margin-top: 24px; }
+.np-footer-rule { border-top: 1.5px solid #2a2219; border-bottom: 4px solid #2a2219; margin-top: 3px; padding: 0; }
+.np-masthead-wrap { text-align: center; padding: 10px 0 5px; }
+.np-masthead-title { font-family: 'Playfair Display', Georgia, serif; font-size: 38px; font-style: italic; font-weight: 400; line-height: 1; color: #2a2219; letter-spacing: 1px; display: block; white-space: nowrap; }
+.np-meta-row { display: flex; align-items: flex-start; justify-content: space-between; padding: 5px 0; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; font-family: Georgia, serif; }
+.np-meta-star { font-size: 15px; margin: 0 6px; line-height: 1; }
+.np-big-headline { text-align: center; font-family: 'Playfair Display', Georgia, serif; font-size: 56px; font-weight: 900; line-height: 0.92; letter-spacing: -1px; padding: 10px 4px 8px; color: #2a2219; }
+.np-two-col { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; }
+.np-col-rule { background: #2a2219; margin: 0 14px; }
+.np-col-l { padding: 0 12px 0 0; }
+.np-col-r { padding: 0 0 0 12px; }
+.np-col-hed { font-family: 'Playfair Display', Georgia, serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.25; margin-bottom: 9px; color: #2a2219; }
+.np-body-text { font-family: Georgia, serif; font-size: 9px; line-height: 1.65; font-style: italic; color: #2a2219; text-align: justify; }
+.np-body-text p { margin-bottom: 8px; }
+.np-body-text strong { font-style: normal; font-size: 9px; font-weight: 700; }
+.np-dropcap-big { font-size: 46px; font-weight: 700; font-style: normal; float: left; line-height: 0.72; margin-right: 3px; margin-top: 5px; font-family: 'Playfair Display', serif; }
+.np-pullquote-box { border: 1.5px solid #2a2219; padding: 14px 18px; margin-top: 14px; text-align: center; }
+.np-pullquote-box p { font-family: 'Playfair Display', serif; font-size: 9px; font-weight: 700; font-style: italic; line-height: 1.55; color: #2a2219; }
+.np-photo-box { width: 100%; background: linear-gradient(160deg, #9A9080, #7A7060); border: 1px solid #888; margin-bottom: 9px; display: flex; align-items: center; justify-content: center; height: 210px; overflow: hidden; position: relative; }
+.np-photo-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.np-photo-label { font-size: 11px; font-style: italic; color: #DDD; text-align: center; font-family: Georgia, serif; line-height: 1.6; padding: 8px 12px; position: absolute; }
+.np-photo-cap { font-size: 8px; font-style: italic; color: #444; margin-bottom: 11px; line-height: 1.5; font-family: Georgia, serif; }
 
 /* SECTION LABEL */
 .section-label { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
@@ -120,9 +135,9 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .card-img.sand-bg     { background: linear-gradient(135deg, #F0E6D3, #E8DFD0); }
 .card-img.lavender-bg { background: linear-gradient(135deg, #DDD8F0, #C5BAE0); }
 .card-body { padding: 1.1rem; }
-.card-tag   { display: inline-block; font-size: 0.65rem; font-weight: 600; color: var(--terracotta); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
-.card-title { font-family: 'Playfair Display', serif; font-size: 1rem; line-height: 1.35; margin-bottom: 0.6rem; }
-.card-meta  { font-size: 0.75rem; color: var(--muted); }
+.card-tag   { display: inline-block; font-size: 0.78rem; font-weight: 600; color: var(--terracotta); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.card-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; line-height: 1.35; margin-bottom: 0.6rem; }
+.card-meta  { font-size: 0.92rem; color: var(--muted); }
 
 /* JOURNAL PAGE */
 .journal-page { padding: 3rem 2.5rem; max-width: 760px; margin: 0 auto; }
@@ -202,7 +217,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--terracotta); background: var(--white); }
 .field textarea { resize: vertical; min-height: 110px; line-height: 1.65; }
 .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2378716C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.95rem center; background-color: var(--cream); padding-right: 2.5rem; cursor: pointer; }
-.char-hint { font-size: 0.72rem; color: var(--muted); margin-top: -0.6rem; margin-bottom: 0.5rem; }
+.char-hint { font-size: 0.72rem; color: var(--muted); margin-top: 0.35rem; margin-bottom: 0.5rem; }
 .notice-box { background: linear-gradient(135deg, #FBF0EC, #FAF7F2); border: 1px solid var(--blush); border-radius: 14px; padding: 1.2rem 1.4rem; display: flex; gap: 0.9rem; align-items: flex-start; margin-bottom: 1.5rem; }
 .notice-box .notice-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
 .notice-box p { font-size: 0.85rem; color: #78716C; line-height: 1.65; }
@@ -238,20 +253,6 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 .footer-col li { font-size: 0.85rem; color: #D6D3D1; margin-bottom: 0.4rem; cursor: pointer; }
 .footer-col li:hover { color: var(--cream); }
 
-@media (max-width: 768px) {
-  nav { padding: 1rem 1.25rem; }
-  .nav-links { display: none; }
-  .hero { grid-template-columns: 1fr; padding: 2rem 1.25rem; min-height: unset; }
-  .hero-right { height: 420px; }
-  .feature-card { grid-template-columns: 1fr; }
-  .story-grid { grid-template-columns: 1fr; }
-  .amount-grid { grid-template-columns: repeat(2,1fr); }
-  .field-row { grid-template-columns: 1fr; }
-  footer { grid-template-columns: 1fr; }
-  .newsletter-banner { flex-direction: column; }
-  .nl-form { flex-direction: column; width: 100%; }
-  .nl-input { width: 100%; }
-}
 /* ADMIN */
 .admin-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--ink); color: var(--white); padding: 0.75rem 2rem; display: none; align-items: center; gap: 1rem; z-index: 999; border-top: 2px solid var(--terracotta); }
 .admin-bar span { font-size: 0.8rem; color: #A8A29E; }
@@ -286,61 +287,21 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 .asr-edit { background: var(--ink); color: var(--white); border: none; padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
 .asr-delete { background: #FEE2E2; color: #DC2626; border: none; padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
 .admin-empty { color: var(--muted); font-size: 0.88rem; text-align: center; padding: 2rem; }
-/* NEWSPAPER HERO */
-@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=IM+Fell+English:ital@0;1&display=swap');
 
-.newspaper-wrap {
-  position: absolute;
-  width: 300px;
-  z-index: 4;
-  transform: rotate(-8deg) translateX(-10px) translateY(10px);
-  transform-origin: center center;
-  box-shadow: 6px 6px 0 #C8BFA8, 14px 14px 0 rgba(0,0,0,0.10), 0 4px 18px rgba(0,0,0,0.18);
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 2rem 1.25rem; min-height: unset; }
+  .hero-right { height: 420px; }
+  .feature-card { grid-template-columns: 1fr; }
+  .story-grid { grid-template-columns: 1fr; }
+  .amount-grid { grid-template-columns: repeat(2,1fr); }
+  .field-row { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; }
+  .newsletter-banner { flex-direction: column; }
+  .nl-form { flex-direction: column; width: 100%; }
+  .nl-input { width: 100%; }
 }
-
-.paper {
-  background: #E8E0CC;
-  width: 100%;
-  padding: 10px 12px 12px;
-  font-family: 'IM Fell English', Georgia, serif;
-  color: #2a2219;
-  border: 1.5px solid #2a2219;
-}
-
-.top-rule { border-top: 2px solid #2a2219; border-bottom: 0.8px solid #2a2219; padding: 1.5px 0; }
-.mid-rule { border-top: 0.8px solid #2a2219; border-bottom: 2px solid #2a2219; padding: 2px 0; margin: 0; }
-.section-rule-top { border-top: 2px solid #2a2219; border-bottom: 0.8px solid #2a2219; padding: 1px 0; margin-bottom: 0; }
-.section-rule-bot { border-top: 0.8px solid #2a2219; border-bottom: 2px solid #2a2219; margin: 0 0 7px; }
-.np-bottom-rules { border-top: 2px solid #2a2219; border-bottom: 0.8px solid #2a2219; padding: 1.5px 0; margin-top: 10px; }
-.np-footer-rule { border-top: 0.8px solid #2a2219; border-bottom: 2px solid #2a2219; margin-top: 2px; }
-
-.masthead { text-align: center; padding: 4px 0 2px; }
-.masthead-title { font-family: 'UnifrakturMaguntia', cursive; font-size: 28px; line-height: 1; color: #2a2219; letter-spacing: 0.5px; display: block; }
-
-.meta-row { display: flex; align-items: center; justify-content: space-between; padding: 2px 0; font-size: 5.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-family: 'IM Fell English', Georgia, serif; }
-.meta-star { font-size: 9px; margin: 0 3px; }
-
-.big-headline { text-align: center; font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 900; line-height: 1.05; letter-spacing: -0.3px; padding: 4px 0 2px; color: #2a2219; }
-
-.np-columns { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 0; }
-.np-col-divider { background: #2a2219; margin: 0 6px; }
-.np-col { padding: 0 6px; }
-.np-col:first-child { padding-left: 0; }
-.np-col:last-child { padding-right: 0; }
-
-.np-col-headline { font-family: 'Playfair Display', Georgia, serif; font-size: 6.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.3; margin-bottom: 4px; color: #2a2219; }
-.np-col-body { font-family: 'IM Fell English', Georgia, serif; font-size: 5.5px; line-height: 1.6; font-style: italic; color: #2a2219; text-align: justify; }
-.np-col-body p { margin-bottom: 4px; }
-.np-col-body strong { font-style: normal; }
-
-.np-dropcap { font-size: 16px; font-weight: 700; font-style: normal; float: left; line-height: 0.75; margin-right: 2px; margin-top: 3px; font-family: 'Playfair Display', serif; }
-
-.np-photo-box { width: 100%; margin-bottom: 4px; border: 0.8px solid #888; }
-.np-photo-inner { width: 100%; }
-.np-caption { font-size: 5px; font-style: italic; color: #555; margin-bottom: 5px; line-height: 1.4; font-family: 'IM Fell English', Georgia, serif; }
-
-.np-pullquote { border: 1px solid #2a2219; padding: 5px 6px; margin-top: 6px; text-align: center; }
-.np-pullquote p { font-family: 'Playfair Display', serif; font-size: 5.5px; font-weight: 700; font-style: italic; line-height: 1.5; color: #2a2219; }
 </style>
 </head>
 <body>
@@ -358,7 +319,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   <button class="nav-cta" onclick="showPage('submit')">Share Your Story</button>
 </nav>
 
-<!-- ═══ HOME ═══════════════════════════════════════════════════════ -->
+<!-- HOME PAGE -->
 <div id="home" class="page active">
   <section class="hero">
     <div class="hero-left">
@@ -370,73 +331,60 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
         <button class="btn-secondary" onclick="showPage('donate')">Support a Cause ♥</button>
       </div>
     </div>
+
     <div class="hero-right">
-  <div class="scene-bg"></div>
-  <div class="newspaper-wrap" id="heroNewspaper">
-    <div class="paper" id="heroPaper">
-
-      <div class="top-rule"></div>
-      <div class="masthead">
-        <span class="masthead-title">The Called Project</span>
-      </div>
-      <div class="mid-rule"></div>
-      <div class="meta-row">
-        <span>VOL. I, NO. 1</span>
-        <span class="meta-star">*</span>
-        <span>CALLEDSTORIES.COM</span>
-        <span class="meta-star">*</span>
-        <span id="np-date">JUNE 3, 2025</span>
-      </div>
-      <div class="section-rule-top"></div>
-      <div class="big-headline" id="np-headline">DOCTOR FINDS HER CALLING</div>
-      <div class="section-rule-bot"></div>
-
-      <div class="np-columns">
-        <div class="np-col">
-          <div class="np-col-headline" id="np-col1-head">A Surgeon Recalls the Night That Changed Everything</div>
-          <div class="np-col-body">
-            <p><span class="np-dropcap" id="np-dropcap">F</span><span id="np-body1">or three semesters she kept her architecture textbooks on the shelf — a reminder of the life she had planned. Her mother, a nurse of twenty-two years, never said a word. She just waited.</span></p>
-            <p id="np-body2">"Medicine was never my dream. It was hers — handed to me like something I was supposed to carry."</p>
-            <p id="np-body3">Then came a Tuesday night in bay four. An elderly woman lay alone. Dr. Castellanos sat with her for nearly two hours. And then — without a word — the patient reached out and held her hand.</p>
-            <div class="np-pullquote">
-              <p id="np-quote">"She reached out and held my hand. In that moment — this is it. This is the whole thing."</p>
+      <!-- NEWSPAPER -->
+      <div class="newspaper" id="mainNewspaper" onclick="newspaperClick()" style="cursor:pointer;">
+        <div class="np-paper">
+          <div class="np-top-rule"></div>
+          <div class="np-masthead-wrap">
+            <span class="np-masthead-title">The Called Project</span>
+          </div>
+          <div class="np-mid-rule"></div>
+          <div class="np-meta-row">
+            <span>VOL. I, NO. 1</span>
+            <span class="np-meta-star">*</span>
+            <span>CALLEDSTORIES.COM</span>
+            <span class="np-meta-star">*</span>
+            <span id="np-date">JUNE 3, 2025</span>
+          </div>
+          <div class="np-section-rule-top"></div>
+          <div class="np-big-headline" id="np-headline">DOCTOR FINDS HER CALLING</div>
+          <div class="np-section-rule-bot"></div>
+          <div class="np-two-col">
+            <div class="np-col-l">
+              <div class="np-col-hed" id="np-col-hed">A Surgeon Recalls the Night That Changed Everything</div>
+              <div class="np-body-text">
+                <p><span class="np-dropcap-big" id="np-dropcap">F</span><span id="np-body1">or three semesters she kept her architecture textbooks on the shelf above her desk — a reminder of the life she had planned. Her mother, a nurse of twenty-two years, never said a word. She just waited.</span></p>
+                <p id="np-body2">"Medicine was never my dream. It was hers — handed to me like something I was supposed to carry."</p>
+                <p id="np-body3">Then came a Tuesday night in bay four. An elderly woman lay alone, her family three states away. Dr. Castellanos sat with her for nearly two hours. And then — without a word — the patient reached out and held her hand.</p>
+                <div class="np-pullquote-box">
+                  <p id="np-quote">"She reached out and held my hand. In that moment — this is it. This is the whole thing."</p>
+                </div>
+              </div>
+            </div>
+            <div class="np-col-rule"></div>
+            <div class="np-col-r">
+              <div class="np-photo-box" id="np-photo-box">
+                <div class="np-photo-label" id="np-photo-label">Dr. Reyna Castellanos<br>Houston Emergency Dept.</div>
+              </div>
+              <div class="np-photo-cap" id="np-photo-cap">Dr. Castellanos at Houston Methodist, where a stranger's hand changed everything.</div>
+              <div class="np-col-hed">Also This Issue</div>
+              <div class="np-body-text" id="np-also">
+                <p><strong>'My Grandmother's Kitchen Was My First Classroom'</strong> — Chef Marcus Lee on abandoning law and finding purpose over a stove.</p>
+                <p><strong>'I Watched a Wrongful Conviction. I Knew.'</strong> — Public defender Amara Osei on what it costs to be called to justice.</p>
+                <p><strong>'Everyone Said Get a Real Job.'</strong> — Creative director Juno Park on the decade she spent proving skeptics wrong.</p>
+                <p>This week's cause: <strong id="np-charity-name">Doctors Without Borders</strong>. Donate at calledstories.com/donate</p>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="np-col-divider"></div>
-
-        <div class="np-col">
-          <div class="np-photo-box">
-            <div class="np-photo-inner">
-              <svg width="100%" height="100" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
-                <rect width="240" height="100" fill="#9A9080"/>
-                <rect width="240" height="100" fill="#7A7060" opacity="0.35"/>
-                <line x1="0" y1="0" x2="240" y2="100" stroke="#686050" stroke-width="0.5"/>
-                <line x1="240" y1="0" x2="0" y2="100" stroke="#686050" stroke-width="0.5"/>
-                <text x="120" y="45" text-anchor="middle" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#CCC" id="np-photo-name">Dr. Reyna Castellanos</text>
-                <text x="120" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="8" font-style="italic" fill="#CCC" id="np-photo-loc">Houston Emergency Dept.</text>
-              </svg>
-            </div>
-          </div>
-          <p class="np-caption" id="np-caption">Dr. Castellanos at Houston Methodist, where a stranger's hand changed everything.</p>
-          <div class="np-col-headline">Also This Issue</div>
-          <div class="np-col-body" id="np-also">
-            <p><strong>'My Grandmother's Kitchen Was My First Classroom'</strong> — Chef Marcus Lee on abandoning law and finding purpose over a stove.</p>
-            <p><strong>'I Watched a Wrongful Conviction. I Knew.'</strong> — Public defender Amara Osei on what it costs to be called to justice.</p>
-            <p><strong>'Everyone Said Get a Real Job.'</strong> — Creative director Juno Park on the decade she spent proving skeptics wrong.</p>
-            <p>This week's cause: <strong>Doctors Without Borders</strong>. Donate at calledstories.com/donate</p>
-          </div>
+          <div class="np-bottom-rules"></div>
+          <div class="np-footer-rule"></div>
         </div>
       </div>
-
-      <div class="np-bottom-rules"></div>
-      <div class="np-footer-rule"></div>
-
+      <!-- END NEWSPAPER -->
     </div>
-  </div>
-</div>
-</section>
+  </section>
 
   <section class="featured">
     <div class="section-label"><span>Featured Story</span><div class="section-label-line"></div></div>
@@ -476,7 +424,6 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     </div>
   </section>
 
-  <!-- Newsletter banner -->
   <div class="newsletter-banner">
     <div class="nl-copy">
       <h2>One story, every week.</h2>
@@ -510,7 +457,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   </footer>
 </div>
 
-<!-- ═══ STORIES PAGE ══════════════════════════════════════════════ -->
+<!-- STORIES PAGE -->
 <div id="stories" class="page">
   <div class="stories-page">
     <div style="text-align:center;margin-bottom:2.5rem;">
@@ -538,7 +485,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   </div>
 </div>
 
-<!-- ═══ JOURNAL PAGE ═══════════════════════════════════════════════ -->
+<!-- JOURNAL PAGE -->
 <div id="journal" class="page">
   <div class="journal-page">
     <h1>Founder's Journal ✦</h1>
@@ -568,7 +515,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   </div>
 </div>
 
-<!-- ═══ DONATE PAGE ═══════════════════════════════════════════════ -->
+<!-- DONATE PAGE -->
 <div id="donate" class="page">
   <div class="donate-page">
     <div class="donate-hero">
@@ -601,7 +548,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   </div>
 </div>
 
-<!-- ═══ ARTICLE PAGE ══════════════════════════════════════════════ -->
+<!-- ARTICLE PAGE (static) -->
 <div id="article" class="page">
   <div class="article-page">
     <button class="back-btn" onclick="showPage('home')">← Back to stories</button>
@@ -626,18 +573,38 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   </div>
 </div>
 
-<!-- ═══ SUBMIT PAGE ════════════════════════════════════════════════ -->
+<!-- DYNAMIC ARTICLE PAGE (admin-published stories) -->
+<div id="dynArticle" class="page">
+  <div class="article-page">
+    <button class="back-btn" onclick="showPage('stories')">← Back to stories</button>
+    <div class="article-kicker" id="dyn-kicker"></div>
+    <h1 id="dyn-title"></h1>
+    <div class="article-byline">
+      <div class="avatar" id="dyn-emoji" style="font-size:1.4rem;background:var(--blush);"></div>
+      <div>
+        <div class="author-name" style="font-weight:600;font-size:0.9rem;" id="dyn-author"></div>
+        <div style="font-size:0.8rem;color:var(--muted);" id="dyn-meta"></div>
+      </div>
+    </div>
+    <div class="article-img" id="dyn-emoji-big" style="font-size:5rem;"></div>
+    <div class="article-body" id="dyn-body"></div>
+    <div class="pullquote" style="margin-top:2rem;">
+      <p id="dyn-charity-why"></p>
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);margin-top:0.75rem;">
+      Charity: <strong id="dyn-charity"></strong> · <span id="dyn-charity-url"></span>
+    </p>
+  </div>
+</div>
+
+<!-- SUBMIT PAGE -->
 <div id="submit" class="page">
   <div class="submit-page">
-
-    <!-- Header -->
     <span style="font-size:0.7rem;font-weight:600;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:0.6rem;">Share Your Story</span>
     <h1>What called you<br>to this?</h1>
     <p class="subtitle">Every profession has a story. Every story has a moment. We'd love to hear yours — whether you're a nurse, a novelist, a carpenter, or a coach. If something pulled you toward the work you do, that's a Called. story.</p>
 
     <div id="submitFormWrap">
-
-      <!-- Section 1: About You -->
       <div class="form-section">
         <h3><span>✦</span> About you</h3>
         <div class="field-row">
@@ -686,7 +653,6 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
         </div>
       </div>
 
-      <!-- Section 2: Your Story -->
       <div class="form-section">
         <h3><span>📖</span> Your story</h3>
         <div class="field">
@@ -696,7 +662,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
         </div>
         <div class="field">
           <label>What called you to this work?</label>
-          <textarea placeholder="Tell us the moment, the feeling, the person, the accident — whatever it was that pointed you here. There are no wrong answers and no minimum length. Just write like you're telling a friend." id="f-calling" style="min-height:160px;"></textarea>
+          <textarea placeholder="Tell us the moment, the feeling, the person, the accident — whatever it was that pointed you here." id="f-calling" style="min-height:160px;"></textarea>
         </div>
         <div class="field">
           <label>Is there anything else you want readers to know? (optional)</label>
@@ -704,10 +670,9 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
         </div>
       </div>
 
-      <!-- Section 3: Charity -->
       <div class="form-section">
         <h3><span>♥</span> Your chosen charity</h3>
-        <p style="font-size:0.88rem;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;">Every story on Called. is paired with a cause the author cares about. Our readers donate directly to the charity you choose — this is your chance to point that generosity somewhere meaningful.</p>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;">Every story on Called. is paired with a cause the author cares about. Our readers donate directly to the charity you choose.</p>
         <div class="field-row">
           <div class="field">
             <label>Charity or organization name</label>
@@ -720,17 +685,15 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
         </div>
         <div class="field">
           <label>Why this one? (shown alongside your story)</label>
-          <textarea placeholder="In a sentence or two — why does this cause matter to you? What's the connection to your work or your calling?" id="f-charity-why"></textarea>
+          <textarea placeholder="In a sentence or two — why does this cause matter to you?" id="f-charity-why"></textarea>
         </div>
       </div>
 
-      <!-- Response time notice -->
       <div class="notice-box">
         <div class="notice-icon">🕐</div>
-        <p><strong>We'll be in touch within one week.</strong> Every submission is read personally. If your story is a good fit for an upcoming issue, we'll reach out to set up a short conversation before anything is published. Nothing goes live without your approval.</p>
+        <p><strong>We'll be in touch within one week.</strong> Every submission is read personally. If your story is a good fit, we'll reach out before anything is published. Nothing goes live without your approval.</p>
       </div>
 
-      <!-- Consent -->
       <div class="consent-row">
         <input type="checkbox" id="f-consent" />
         <label for="f-consent">I give Called. permission to publish my story and understand that the team may reach out to develop it further before anything goes live. My contact details will never be shared.</label>
@@ -739,116 +702,237 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
       <button class="submit-form-btn" id="submitBtn" onclick="submitStory()">Send My Story →</button>
     </div>
 
-    <!-- Success state -->
     <div class="submit-success" id="submitSuccess">
       <div class="big-icon">✦</div>
       <h2>Your story is on its way.</h2>
       <p>Thank you for trusting us with it. We read every submission personally and will be in touch within a week — keep an eye on your inbox.</p>
       <button class="back-home" onclick="showPage('home')">Back to Called.</button>
     </div>
-
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- ADMIN LOGIN OVERLAY -->
+<div class="admin-login" id="adminLogin">
+  <div class="admin-login-box">
+    <h3>Admin Access</h3>
+    <p>Enter your password to manage stories.</p>
+    <input type="password" id="adminPassword" placeholder="Password" onkeydown="if(event.key==='Enter')adminSignIn()" />
+    <button onclick="adminSignIn()">Sign In</button>
+    <p id="adminLoginError" style="color:#DC2626;font-size:0.8rem;margin-top:0.75rem;display:none;">Incorrect password.</p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem;">
+    <h2>Story Manager</h2>
+    <button class="admin-btn secondary" onclick="closeAdmin()">✕ Close</button>
+  </div>
+  <p class="admin-sub">Add, edit, or remove stories. Changes show up live on the site.</p>
+  <div class="admin-story-form">
+    <h3 id="adminFormTitle">✦ Add New Story</h3>
+    <input type="hidden" id="a-editing-index" value="-1" />
+    <div class="admin-2col">
+      <div class="admin-field"><label>Author Name</label><input type="text" id="a-name" placeholder="Dr. Reyna Castellanos" /></div>
+      <div class="admin-field"><label>Job Title &amp; Location</label><input type="text" id="a-meta" placeholder="ER Physician · Houston, TX" /></div>
+    </div>
+    <div class="admin-2col">
+      <div class="admin-field">
+        <label>Field</label>
+        <select id="a-field">
+          <option value="" disabled selected>Select one…</option>
+          <option>Medicine</option><option>Law</option><option>Education</option>
+          <option>Tech</option><option>Arts</option><option>Culinary</option><option>Other</option>
+        </select>
+      </div>
+      <div class="admin-field"><label>Emoji / Icon</label><input type="text" id="a-emoji" placeholder="🩺" /></div>
+    </div>
+    <div class="admin-field">
+      <label>Newspaper Photo (optional)</label>
+      <input type="file" id="a-photo" accept="image/*" style="font-size:0.82rem;padding:0.4rem 0;" />
+      <span style="font-size:0.72rem;color:var(--muted);margin-top:2px;">Appears in the newspaper photo box on the homepage.</span>
+    </div>
+    <div class="admin-field"><label>Story Title / Headline</label><input type="text" id="a-title" placeholder=""A patient squeezed my hand and I never looked back"" /></div>
+    <div class="admin-field"><label>Story Body</label><textarea id="a-body" style="min-height:160px;" placeholder="Paste the full story here…"></textarea></div>
+    <div class="admin-2col">
+      <div class="admin-field"><label>Charity Name</label><input type="text" id="a-charity" placeholder="Doctors Without Borders" /></div>
+      <div class="admin-field"><label>Charity URL</label><input type="text" id="a-charity-url" placeholder="msf.org" /></div>
+    </div>
+    <div class="admin-field"><label>Charity Quote</label><textarea id="a-charity-why" style="min-height:70px;"></textarea></div>
+    <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
+      <button class="admin-publish-btn" onclick="adminSaveStory()">Publish Story</button>
+      <button class="admin-btn secondary" onclick="adminClearForm()" style="padding:0.75rem 1.5rem;">Clear</button>
+    </div>
+  </div>
+  <div class="admin-stories-list">
+    <h3>Published Stories</h3>
+    <div id="adminStoriesList"></div>
+  </div>
+</div>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar" id="adminBar">
+  <span>⚙ Admin Mode</span>
+  <button class="admin-btn" onclick="document.getElementById('adminPanel').style.display='block'">Manage Stories</button>
+  <button class="admin-btn secondary" onclick="adminSignOut()">Sign Out</button>
+</div>
+
 <script>
-  emailjs.init("CnYxj9I6LbfqGnzy8");
-
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    window.scrollTo(0, 0);
+function newspaperClick() {
+  if (stories && stories.length > 0) {
+    openDynamicArticle(stories[0]);
+  } else {
+    showPage('article');
   }
+}
 
-  function selectAmount(el) {
-    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
-    el.classList.add('selected');
+// ── CORE ──────────────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function selectAmount(el) {
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function saveEntry() {
+  const title = document.getElementById('journalTitle').value.trim();
+  const body  = document.getElementById('journalBody').value.trim();
+  if (!title && !body) return;
+  const dateStr = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
+  const el = document.createElement('div');
+  el.className = 'entry-card';
+  el.innerHTML = `<div class="entry-date">${dateStr}</div><div class="entry-title">${title||'Untitled'}</div><div class="entry-body">${body||'…'}</div><div class="entry-mood">✍️</div>`;
+  document.getElementById('journalEntries').prepend(el);
+  document.getElementById('journalTitle').value = '';
+  document.getElementById('journalBody').value  = '';
+}
+function filterStories(specialty, pill) {
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  document.querySelectorAll('#storyGrid .story-card').forEach(card => {
+    card.classList.toggle('hidden', specialty !== 'all' && card.dataset.specialty !== specialty);
+  });
+}
+function subscribeNewsletter() {
+  const val = document.getElementById('nlEmail').value.trim();
+  if (!val || !val.includes('@')) return;
+  document.getElementById('nlForm').style.display = 'none';
+  document.getElementById('nlSuccess').style.display = 'flex';
+}
+document.getElementById('todayDate').textContent =
+  new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+
+// ── NEWSPAPER UPDATE ──────────────────────────────────────────────
+function updateHeroNewspaper(d) {
+  if (!d) return;
+  const dateStr = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' }).toUpperCase();
+  document.getElementById('np-date').textContent = dateStr;
+  const hl = (d.title || '').toUpperCase();
+  document.getElementById('np-headline').textContent = hl.length > 50 ? hl.slice(0, 47) + '\u2026' : hl;
+  const job = d.job || d.meta || 'A storyteller';
+  document.getElementById('np-col-hed').textContent = 'A ' + job + ' Recalls the Moment That Changed Everything';
+  const body = d.calling || d.body || '';
+  const sentences = body.split(/(?<=[.!?])\s+/);
+  document.getElementById('np-dropcap').textContent = (d.name || 'S').charAt(0);
+  document.getElementById('np-body1').textContent = 'From ' + (d.location || d.meta || 'their hometown') + ', ' + (d.name || '') + ' never expected to end up where they did. But something pulled them there \u2014 and they never looked back.';
+  document.getElementById('np-body2').textContent = sentences[0] ? '\u201c' + sentences[0].replace(/^"|"$/g, '') + '\u201d' : '';
+  document.getElementById('np-body3').textContent = sentences[1] || '';
+  document.getElementById('np-quote').textContent = '\u201c' + (d.title || body.slice(0, 80)) + '\u201d';
+  const photoBox = document.getElementById('np-photo-box');
+  const photoLabel = document.getElementById('np-photo-label');
+  if (d.photo) {
+    photoBox.innerHTML = '<img src="' + d.photo + '" style="width:100%;height:100%;object-fit:cover;display:block;" />';
+  } else {
+    photoBox.innerHTML = '<div class="np-photo-label" id="np-photo-label">' + (d.name || '') + '<br>' + (d.location || d.meta || '') + '</div>';
   }
-
-  function saveEntry() {
-    const title = document.getElementById('journalTitle').value.trim();
-    const body  = document.getElementById('journalBody').value.trim();
-    if (!title && !body) return;
-    const dateStr = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
-    const el = document.createElement('div');
-    el.className = 'entry-card';
-    el.innerHTML = `<div class="entry-date">${dateStr}</div><div class="entry-title">${title||'Untitled'}</div><div class="entry-body">${body||'…'}</div><div class="entry-mood">✍️</div>`;
-    document.getElementById('journalEntries').prepend(el);
-    document.getElementById('journalTitle').value = '';
-    document.getElementById('journalBody').value  = '';
+  document.getElementById('np-photo-cap').textContent = (d.name || '') + ' \u2014 ' + (d.job || d.meta || '') + '.';
+  const charityName = d.charity || d.charityName || '';
+  const otherStories = (typeof stories !== 'undefined' ? stories : []).slice(1, 4);
+  let alsoHTML = '';
+  otherStories.forEach(s => { alsoHTML += '<p><strong>\u2018' + s.title + '\u2019</strong> \u2014 ' + s.name + ', ' + (s.meta || s.field) + '.</p>'; });
+  if (!alsoHTML) {
+    alsoHTML = '<p><strong>\u2018My Grandmother\u2019s Kitchen Was My First Classroom\u2019</strong> \u2014 Chef Marcus Lee on abandoning law and finding purpose over a stove.</p>' +
+      '<p><strong>\u2018I Watched a Wrongful Conviction. I Knew.\u2019</strong> \u2014 Public defender Amara Osei on what it costs to be called to justice.</p>' +
+      '<p><strong>\u2018Everyone Said Get a Real Job.\u2019</strong> \u2014 Creative director Juno Park on the decade she spent proving skeptics wrong.</p>';
   }
+  alsoHTML += '<p>This week\u2019s cause: <strong id="np-charity-name">' + (charityName || 'Doctors Without Borders') + '</strong>. Donate at calledstories.com/donate</p>';
+  document.getElementById('np-also').innerHTML = alsoHTML;
+}
 
-  function filterStories(specialty, pill) {
-    document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-    document.querySelectorAll('#storyGrid .story-card').forEach(card => {
-      card.classList.toggle('hidden', specialty !== 'all' && card.dataset.specialty !== specialty);
-    });
-  }
-
-  function subscribeNewsletter() {
-    const val = document.getElementById('nlEmail').value.trim();
-    if (!val || !val.includes('@')) return;
-    document.getElementById('nlForm').style.display = 'none';
-    const s = document.getElementById('nlSuccess');
-    s.style.display = 'flex';
-  }
-
-  async function submitStory() {
-    const required = ['f-name','f-location','f-job','f-field','f-email','f-title','f-calling','f-charity','f-charity-why'];
-    for (const id of required) {
-      const el = document.getElementById(id);
-      if (!el.value.trim()) {
-        el.style.borderColor = 'var(--terracotta)';
-        el.scrollIntoView({ behavior:'smooth', block:'center' });
-        el.focus();
-        return;
-      }
-      el.style.borderColor = '';
-    }
-    if (!document.getElementById('f-consent').checked) {
-      document.querySelector('.consent-row').style.borderColor = 'var(--terracotta)';
+// ── SUBMIT FORM ───────────────────────────────────────────────────
+async function submitStory() {
+  const required = ['f-name','f-location','f-job','f-field','f-email','f-title','f-calling','f-charity','f-charity-why'];
+  for (const id of required) {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.style.borderColor = 'var(--terracotta)';
+      el.scrollIntoView({ behavior:'smooth', block:'center' });
+      el.focus();
       return;
     }
-
-    const btn = document.getElementById('submitBtn');
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    const params = {
-      from_name:   document.getElementById('f-name').value,
-      from_email:  document.getElementById('f-email').value,
-      location:    document.getElementById('f-location').value,
-      job:         document.getElementById('f-job').value,
-      field:       document.getElementById('f-field').value,
-      contact:     document.getElementById('f-contact').value,
-      story_title: document.getElementById('f-title').value,
-      calling:     document.getElementById('f-calling').value,
-      extra:       document.getElementById('f-extra').value,
-      charity:     document.getElementById('f-charity').value,
-      charity_url: document.getElementById('f-charity-url').value,
-      charity_why: document.getElementById('f-charity-why').value,
-    };
-
-    try {
-  await emailjs.send("service_7fllg63", "template_2vgl1ty", params);
-  await emailjs.send("service_7fllg63", "template_jup5wza", params);
-  document.getElementById('submitFormWrap').style.display = 'none';
-  document.getElementById('submitSuccess').style.display  = 'block';
-  window.scrollTo(0, 0);
-} catch (err) {
-  console.error('EmailJS error:', err);
-  btn.textContent = 'Send My Story →';
-  btn.disabled = false;
-  alert('Something went wrong. Please try again or email us at calledstories@gmail.com');
-}
+    el.style.borderColor = '';
+  }
+  if (!document.getElementById('f-consent').checked) {
+    document.querySelector('.consent-row').style.borderColor = 'var(--terracotta)';
+    return;
   }
 
-  document.getElementById('todayDate').textContent =
-    new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
-// ── ADMIN ──────────────────────────────────────────────
-const ADMIN_PASSWORD = "called2025"; // change this to whatever you want
+  const fieldEmojis = {
+    'Medicine & Healthcare': '🩺', 'Law & Justice': '⚖️', 'Education': '📚',
+    'Technology': '💻', 'Arts & Design': '🎨', 'Culinary & Hospitality': '👨‍🍳',
+    'Science & Research': '🔬', 'Business & Entrepreneurship': '💼',
+    'Trades & Crafts': '🔨', 'Social Work & Nonprofit': '🤝',
+    'Athletics & Coaching': '🏅', 'Other': '✦'
+  };
 
+  const btn = document.querySelector('.submit-form-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  const data = {
+    _replyto:    document.getElementById('f-email').value,
+    name:        document.getElementById('f-name').value,
+    location:    document.getElementById('f-location').value,
+    job:         document.getElementById('f-job').value,
+    field:       document.getElementById('f-field').value,
+    email:       document.getElementById('f-email').value,
+    title:       document.getElementById('f-title').value,
+    calling:     document.getElementById('f-calling').value,
+    extra:       document.getElementById('f-extra')?.value || '',
+    charity:     document.getElementById('f-charity').value,
+    charity_url: document.getElementById('f-charity-url')?.value || '',
+    charity_why: document.getElementById('f-charity-why').value,
+    contact:     document.getElementById('f-contact')?.value || '',
+    emoji:       fieldEmojis[document.getElementById('f-field').value] || '✦',
+  };
+
+  try {
+    const res = await fetch('https://formspree.io/f/mjgdkjgv', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      updateHeroNewspaper(data);
+      document.getElementById('submitFormWrap').style.display = 'none';
+      document.getElementById('submitSuccess').style.display  = 'block';
+      window.scrollTo(0, 0);
+    } else {
+      btn.textContent = 'Send My Story →';
+      btn.disabled = false;
+      alert('Something went wrong — please try again.');
+    }
+  } catch (err) {
+    btn.textContent = 'Send My Story →';
+    btn.disabled = false;
+    alert('Network error — please check your connection and try again.');
+  }
+}
+
+// ── ADMIN ─────────────────────────────────────────────────────────
+const ADMIN_PASSWORD = "called2025";
 let stories = JSON.parse(localStorage.getItem('called_stories') || '[]');
 
 function renderAdminStoriesList() {
@@ -884,23 +968,33 @@ function adminSaveStory() {
     charity:    document.getElementById('a-charity').value.trim(),
     charityUrl: document.getElementById('a-charity-url').value.trim(),
     charityWhy: document.getElementById('a-charity-why').value.trim(),
+    photo:      (idx !== -1 && stories[idx]) ? (stories[idx].photo || '') : '',
   };
-  if (!story.name || !story.title || !story.body) {
-    alert('Name, title, and story body are required.');
-    return;
-  }
-  if (idx === -1) {
-    stories.unshift(story);
+  if (!story.name || !story.title || !story.body) { alert('Name, title, and story body are required.'); return; }
+  const fileInput = document.getElementById('a-photo');
+  const file = fileInput && fileInput.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      story.photo = e.target.result;
+      _finishAdminSave(idx, story);
+    };
+    reader.readAsDataURL(file);
   } else {
-    stories[idx] = story;
-    document.getElementById('a-editing-index').value = -1;
-    document.getElementById('adminFormTitle').textContent = '✦ Add New Story';
+    _finishAdminSave(idx, story);
   }
+}
+function _finishAdminSave(idx, story) {
+  if (idx === -1) { stories.unshift(story); }
+  else { stories[idx] = story; document.getElementById('a-editing-index').value = -1; document.getElementById('adminFormTitle').textContent = '✦ Add New Story'; }
   localStorage.setItem('called_stories', JSON.stringify(stories));
   renderAdminStoriesList();
   renderPublicStories();
   adminClearForm();
-  updateHeroNewspaper();
+  if (stories.length > 0) {
+    const s = stories[0];
+    updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, calling: s.body, charity: s.charity, photo: s.photo });
+  }
 }
 
 function adminEditStory(i) {
@@ -915,6 +1009,9 @@ function adminEditStory(i) {
   document.getElementById('a-charity').value     = s.charity;
   document.getElementById('a-charity-url').value = s.charityUrl;
   document.getElementById('a-charity-why').value = s.charityWhy;
+  // show existing photo hint
+  const pf = document.getElementById('a-photo');
+  if (pf) { pf.value = ''; }
   document.getElementById('adminFormTitle').textContent = '✏️ Editing Story';
   document.querySelector('.admin-story-form').scrollIntoView({ behavior: 'smooth' });
 }
@@ -929,6 +1026,7 @@ function adminDeleteStory(i) {
 
 function adminClearForm() {
   ['a-name','a-meta','a-title','a-body','a-charity','a-charity-url','a-charity-why','a-emoji'].forEach(id => document.getElementById(id).value = '');
+  const pf = document.getElementById('a-photo'); if (pf) pf.value = '';
   document.getElementById('a-field').selectedIndex = 0;
   document.getElementById('a-editing-index').value = -1;
   document.getElementById('adminFormTitle').textContent = '✦ Add New Story';
@@ -937,8 +1035,7 @@ function adminClearForm() {
 function renderPublicStories() {
   if (stories.length === 0) return;
   const grid = document.getElementById('storyGrid');
-  const dynamicCards = grid.querySelectorAll('.dynamic-card');
-  dynamicCards.forEach(c => c.remove());
+  grid.querySelectorAll('.dynamic-card').forEach(c => c.remove());
   stories.forEach(s => {
     const card = document.createElement('div');
     card.className = 'story-card dynamic-card';
@@ -956,13 +1053,14 @@ function renderPublicStories() {
 }
 
 function openDynamicArticle(s) {
-  document.getElementById('dyn-kicker').textContent  = s.field + ' · ' + s.meta;
-  document.getElementById('dyn-title').textContent   = s.title;
-  document.getElementById('dyn-author').textContent  = s.name;
-  document.getElementById('dyn-meta').textContent    = s.meta;
-  document.getElementById('dyn-emoji').textContent   = s.emoji;
-  document.getElementById('dyn-body').innerHTML      = s.body.split('\n\n').map(p => `<p>${p}</p>`).join('');
-  document.getElementById('dyn-charity').textContent = s.charity;
+  document.getElementById('dyn-kicker').textContent   = s.field + ' · ' + s.meta;
+  document.getElementById('dyn-title').textContent    = s.title;
+  document.getElementById('dyn-author').textContent   = s.name;
+  document.getElementById('dyn-meta').textContent     = s.meta;
+  document.getElementById('dyn-emoji').textContent    = s.emoji;
+  document.getElementById('dyn-emoji-big').textContent = s.emoji;
+  document.getElementById('dyn-body').innerHTML       = s.body.split('\n\n').map(p => `<p>${p}</p>`).join('');
+  document.getElementById('dyn-charity').textContent  = s.charity;
   document.getElementById('dyn-charity-url').textContent = s.charityUrl;
   document.getElementById('dyn-charity-why').textContent = s.charityWhy;
   showPage('dynArticle');
@@ -971,187 +1069,44 @@ function openDynamicArticle(s) {
 function adminSignIn() {
   const pw = document.getElementById('adminPassword').value;
   if (pw === ADMIN_PASSWORD) {
-    document.getElementById('adminLogin').style.display   = 'none';
-    document.getElementById('adminBar').style.display     = 'flex';
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminBar').style.display   = 'flex';
     sessionStorage.setItem('called_admin', '1');
     renderAdminStoriesList();
   } else {
     document.getElementById('adminLoginError').style.display = 'block';
   }
 }
-
 function adminSignOut() {
   sessionStorage.removeItem('called_admin');
   document.getElementById('adminBar').style.display   = 'none';
   document.getElementById('adminPanel').style.display = 'none';
 }
+function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
 
-function closeAdmin() {
-  document.getElementById('adminPanel').style.display = 'none';
-}
-
-// Secret key combo to open admin login: press Shift + A + D
+// Secret key combo: Shift + A + D
 const adminKeys = new Set();
 document.addEventListener('keydown', e => {
   adminKeys.add(e.key);
   if (adminKeys.has('A') && adminKeys.has('D') && adminKeys.has('Shift')) {
-    if (!sessionStorage.getItem('called_admin')) {
-      document.getElementById('adminLogin').style.display = 'flex';
-    }
+    if (!sessionStorage.getItem('called_admin')) document.getElementById('adminLogin').style.display = 'flex';
   }
 });
 document.addEventListener('keyup', e => adminKeys.delete(e.key));
 
-// Restore admin session on refresh
-// Restore admin session on refresh
-function updateHeroNewspaper() {
-  if (!stories || stories.length === 0) return;
-  const latest = stories[0];
-  const dateStr = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' }).toUpperCase();
-  document.getElementById('np-date').textContent = dateStr;
-  document.getElementById('np-headline').textContent = latest.title.toUpperCase();
-  document.getElementById('np-col1-head').textContent = latest.title;
-  const bodyText = latest.body || '';
-  const sentences = bodyText.split(/(?<=[.!?])\s+/);
-  const dropcapLetter = bodyText.trim()[0] || 'O';
-  document.getElementById('np-dropcap').textContent = dropcapLetter;
-  document.getElementById('np-body1').textContent = bodyText.trim().substring(1, 180);
-  document.getElementById('np-body2').textContent = sentences[1] || '';
-  document.getElementById('np-body3').textContent = sentences[2] || '';
-  document.getElementById('np-quote').textContent = '"' + bodyText.trim().substring(0, 100) + '…"';
-  document.getElementById('np-photo-name').textContent = latest.name;
-  document.getElementById('np-photo-loc').textContent = latest.meta || '';
-  document.getElementById('np-caption').textContent = latest.name + ' — ' + (latest.meta || '') + '.';
-  let alsoHTML = '';
-  stories.slice(1, 4).forEach(s => {
-    alsoHTML += `<p><strong>'${s.title}'</strong> — ${s.name}, ${s.meta || s.field}.</p>`;
-  });
-  if (latest.charity) alsoHTML += `<p>This week's cause: <strong>${latest.charity}</strong>. Donate at calledstories.com/donate</p>`;
-  if (alsoHTML) document.getElementById('np-also').innerHTML = alsoHTML;
-}
-
+// On load
 document.addEventListener('DOMContentLoaded', () => {
   if (sessionStorage.getItem('called_admin')) {
     document.getElementById('adminBar').style.display = 'flex';
     renderAdminStoriesList();
   }
   renderPublicStories();
-  updateHeroNewspaper();
+  // If admin has published stories, show the latest one in the newspaper
+  if (stories.length > 0) {
+    const s = stories[0];
+    updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, charity: s.charity });
+  }
 });
 </script>
-
-<!-- ADMIN LOGIN OVERLAY -->
-<div class="admin-login" id="adminLogin">
-  <div class="admin-login-box">
-    <h3>Admin Access</h3>
-    <p>Enter your password to manage stories.</p>
-    <input type="password" id="adminPassword" placeholder="Password" onkeydown="if(event.key==='Enter')adminSignIn()" />
-    <button onclick="adminSignIn()">Sign In</button>
-    <p id="adminLoginError" style="color:#DC2626;font-size:0.8rem;margin-top:0.75rem;display:none;">Incorrect password.</p>
-  </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="admin-panel" id="adminPanel">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.25rem;">
-    <h2>Story Manager</h2>
-    <button class="admin-btn secondary" onclick="closeAdmin()">✕ Close</button>
-  </div>
-  <p class="admin-sub">Add, edit, or remove stories. Changes show up live on the site.</p>
-
-  <div class="admin-story-form">
-    <h3 id="adminFormTitle">✦ Add New Story</h3>
-    <input type="hidden" id="a-editing-index" value="-1" />
-    <div class="admin-2col">
-      <div class="admin-field">
-        <label>Author Name</label>
-        <input type="text" id="a-name" placeholder="Dr. Reyna Castellanos" />
-      </div>
-      <div class="admin-field">
-        <label>Job Title &amp; Location</label>
-        <input type="text" id="a-meta" placeholder="ER Physician · Houston, TX" />
-      </div>
-    </div>
-    <div class="admin-2col">
-      <div class="admin-field">
-        <label>Field</label>
-        <select id="a-field">
-          <option value="" disabled selected>Select one…</option>
-          <option>Medicine</option>
-          <option>Law</option>
-          <option>Education</option>
-          <option>Tech</option>
-          <option>Arts</option>
-          <option>Culinary</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="admin-field">
-        <label>Emoji / Icon</label>
-        <input type="text" id="a-emoji" placeholder="🩺" />
-      </div>
-    </div>
-    <div class="admin-field">
-      <label>Story Title / Headline</label>
-      <input type="text" id="a-title" placeholder=""A patient squeezed my hand and I never looked back"" />
-    </div>
-    <div class="admin-field">
-      <label>Story Body</label>
-      <textarea id="a-body" style="min-height:160px;" placeholder="Paste the full story here…"></textarea>
-    </div>
-    <div class="admin-2col">
-      <div class="admin-field">
-        <label>Charity Name</label>
-        <input type="text" id="a-charity" placeholder="Doctors Without Borders" />
-      </div>
-      <div class="admin-field">
-        <label>Charity URL</label>
-        <input type="text" id="a-charity-url" placeholder="msf.org" />
-      </div>
-    </div>
-    <div class="admin-field">
-      <label>Charity Quote (why they chose it)</label>
-      <textarea id="a-charity-why" style="min-height:70px;"></textarea>
-    </div>
-    <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
-      <button class="admin-publish-btn" onclick="adminSaveStory()">Publish Story</button>
-      <button class="admin-btn secondary" onclick="adminClearForm();updateHeroNewspaper();" style="padding:0.75rem 1.5rem;">Clear</button>
-    </div>
-  </div>
-
-  <div class="admin-stories-list">
-    <h3>Published Stories</h3>
-    <div id="adminStoriesList"></div>
-  </div>
-</div>
-
-<!-- ADMIN BAR (shown when logged in) -->
-<div class="admin-bar" id="adminBar">
-  <span>⚙ Admin Mode</span>
-  <button class="admin-btn" onclick="document.getElementById('adminPanel').style.display='block'">Manage Stories</button>
-  <button class="admin-btn secondary" onclick="adminSignOut()">Sign Out</button>
-</div>
-<div id="dynArticle" class="page">
-  <div class="article-page">
-    <button class="back-btn" onclick="showPage('stories')">← Back to stories</button>
-    <div class="article-kicker" id="dyn-kicker"></div>
-    <h1 id="dyn-title"></h1>
-    <div class="article-byline">
-      <div class="avatar" id="dyn-emoji" style="font-size:1.4rem;background:var(--blush);"></div>
-      <div>
-        <div class="author-name" style="font-weight:600;font-size:0.9rem;" id="dyn-author"></div>
-        <div style="font-size:0.8rem;color:var(--muted);" id="dyn-meta"></div>
-      </div>
-    </div>
-    <div class="article-img" id="dyn-emoji-big" style="font-size:5rem;"></div>
-    <div class="article-body" id="dyn-body"></div>
-    <div class="pullquote" style="margin-top:2rem;">
-      <p id="dyn-charity-why"></p>
-    </div>
-    <p style="font-size:0.8rem;color:var(--muted);margin-top:0.75rem;">
-      Charity: <strong id="dyn-charity"></strong> · <span id="dyn-charity-url"></span>
-    </p>
-  </div>
-</div>
 </body>
 </html>
