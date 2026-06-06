@@ -344,6 +344,17 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   .nl-form { flex-direction: column; width: 100%; }
   .nl-input { width: 100%; }
 }
+.custom-amount-wrap { max-width: 640px; margin: 0 auto 1.5rem; }
+.custom-amount-input { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--ink); border: 1.5px solid var(--sand); border-radius: 12px; padding: 0.7rem 1rem; background: var(--cream); outline: none; transition: border-color 0.2s; width: 100%; }
+.custom-amount-input:focus { border-color: var(--terracotta); background: var(--white); }
+.pledge-tracker { max-width: 640px; margin: 0 auto 1.5rem; background: var(--white); border: 1px solid var(--sand); border-radius: 16px; padding: 1.25rem 1.5rem; }
+.pledge-tracker .pledge-label { font-size: 0.75rem; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.pledge-tracker .pledge-amount { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--terracotta); margin-bottom: 0.3rem; }
+.pledge-tracker .pledge-sub { font-size: 0.8rem; color: var(--muted); }
+.pledge-bar-wrap { background: var(--sand); border-radius: 100px; height: 6px; margin-top: 0.75rem; overflow: hidden; }
+.pledge-bar { background: var(--terracotta); height: 100%; border-radius: 100px; transition: width 0.6s ease; width: 0%; }
+.donate-thanks { display: none; text-align: center; max-width: 640px; margin: 0 auto 1.5rem; background: #F0FFF4; border: 1px solid var(--sage); border-radius: 16px; padding: 1rem 1.5rem; font-size: 0.9rem; color: var(--ink); }
+
 </style>
 </head>
 <body>
@@ -575,13 +586,23 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
         <a id="donate-charity-link" href="https://msf.org" target="_blank" rel="noopener" class="charity-tag" style="color:var(--terracotta);text-decoration:none;">doctors without borders · msf.org</a>
       </div>
     </div>
-    <div class="amount-grid">
-      <div class="amount-btn selected" onclick="selectAmount(this)"><div class="amt">$10</div><div class="sub">small spark</div></div>
-      <div class="amount-btn" onclick="selectAmount(this)"><div class="amt">$25</div><div class="sub">rising flame</div></div>
-      <div class="amount-btn" onclick="selectAmount(this)"><div class="amt">$50</div><div class="sub">bright light</div></div>
-      <div class="amount-btn" onclick="selectAmount(this)"><div class="amt">$100</div><div class="sub">blazing</div></div>
-    </div>
-    <a id="donate-cta-link" href="https://msf.org" target="_blank" rel="noopener" class="donate-cta" style="text-decoration:none;display:block;text-align:center;">Donate to Doctors Without Borders ♥</a>
+    <div class="pledge-tracker" id="pledgeTracker">
+  <div class="pledge-label">Pledged this week</div>
+  <div class="pledge-amount" id="pledgeAmount">$0</div>
+  <div class="pledge-sub" id="pledgeSub">Be the first to pledge to this week's cause</div>
+  <div class="pledge-bar-wrap"><div class="pledge-bar" id="pledgeBar"></div></div>
+</div>
+<div class="amount-grid">
+  <div class="amount-btn selected" onclick="selectAmount(this, 10)"><div class="amt">$10</div><div class="sub">small spark</div></div>
+  <div class="amount-btn" onclick="selectAmount(this, 25)"><div class="amt">$25</div><div class="sub">rising flame</div></div>
+  <div class="amount-btn" onclick="selectAmount(this, 50)"><div class="amt">$50</div><div class="sub">bright light</div></div>
+  <div class="amount-btn" onclick="selectAmount(this, 100)"><div class="amt">$100</div><div class="sub">blazing</div></div>
+</div>
+<div class="custom-amount-wrap">
+  <input class="custom-amount-input" type="number" id="customAmount" placeholder="Or enter your own amount… e.g. 35" min="1" />
+</div>
+<div class="donate-thanks" id="donateThanks">✦ Thank you for pledging! You're being taken to the charity's page to complete your donation.</div>
+<a id="donate-cta-link" href="https://msf.org" target="_blank" rel="noopener" class="donate-cta" onclick="recordPledge()" style="text-decoration:none;display:block;text-align:center;">Donate to Doctors Without Borders ♥</a>
     <div class="past-charities">
       <h3>Past weeks' causes</h3>
       <div class="past-row"><div class="past-emoji">👨‍🍳</div><div class="past-info"><div class="pname">No Kid Hungry</div><div class="pwho">Chosen by Marcus Lee · Chef</div></div><div class="past-raised">$2,340 raised</div></div>
@@ -855,9 +876,45 @@ function showPage(id) {
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
 }
-function selectAmount(el) {
+let selectedAmount = 10;
+function selectAmount(el, amt) {
   document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
+  selectedAmount = amt;
+  document.getElementById('customAmount').value = '';
+}
+function recordPledge() {
+  var custom = document.getElementById('customAmount').value;
+  var amount = custom ? parseInt(custom) : selectedAmount;
+  if (!amount || amount < 1) return;
+  var charityName = document.getElementById('donate-charity-name').textContent || 'current';
+  var key = 'pledge_' + charityName.toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 30);
+  var existing = parseInt(localStorage.getItem(key) || '0');
+  var newTotal = existing + amount;
+  localStorage.setItem(key, newTotal);
+  updatePledgeDisplay(newTotal);
+  var thanks = document.getElementById('donateThanks');
+  thanks.style.display = 'block';
+  setTimeout(function() { thanks.style.display = 'none'; }, 4000);
+}
+function updatePledgeDisplay(total) {
+  if (!total) return;
+  document.getElementById('pledgeAmount').textContent = '$' + total.toLocaleString();
+  var count = Math.max(1, Math.round(total / 30));
+  document.getElementById('pledgeSub').textContent = count + ' reader' + (count === 1 ? '' : 's') + ' pledged this week';
+  var pct = Math.min(100, (total / 1000) * 100);
+  document.getElementById('pledgeBar').style.width = pct + '%';
+}
+function loadPledgeForCharity(charityName) {
+  var key = 'pledge_' + (charityName || '').toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 30);
+  var total = parseInt(localStorage.getItem(key) || '0');
+  if (total > 0) {
+    updatePledgeDisplay(total);
+  } else {
+    document.getElementById('pledgeAmount').textContent = '$0';
+    document.getElementById('pledgeSub').textContent = 'Be the first to pledge to this week\'s cause';
+    document.getElementById('pledgeBar').style.width = '0%';
+  }
 }
 function saveEntry() {
   const title = document.getElementById('journalTitle').value.trim();
@@ -1090,6 +1147,7 @@ function _finishAdminSave(idx, story) {
     const s = stories[0];
     updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, calling: s.body, charity: s.charity, photo: s.photo });
     updateDonatePage(s);
+    loadPledgeForCharity(name);
   }
 }
 
@@ -1197,6 +1255,7 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('adminLogin').style.display = 'flex';
         }
       }
+    loadPledgeForCharity('Doctors Without Borders');
     });
   }
   if (sessionStorage.getItem('called_admin')) {
