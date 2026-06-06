@@ -51,7 +51,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); }
 
 /* NEWSPAPER SCENE */
-.hero-right { position: relative; height: 750px; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; }
+.hero-right { position: relative; height: 870px; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; }
 .scene-bg { display: none; }
 
 /* NEWSPAPER */
@@ -60,23 +60,27 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 /* NEWSPAPER STYLED */
 .newspaper {
   position: absolute;
-  top: 80px;
+  top: 30px;
   left: 50%;
-  margin-left: -320px;
+  margin-left: -290px;
   width: 580px;
+  height: 750px;
   z-index: 4;
   transform: rotate(-8deg);
   transform-origin: top center;
   box-shadow: 8px 8px 0 #C8BFA8, 18px 18px 0 rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.18);
-  overflow: visible;
+  overflow: hidden;
 }
 .np-paper {
   background: #EAE2CC;
   width: 100%;
-  padding: 10px 24px 800px;
+  height: 100%;
+  overflow: hidden;
+  padding: 14px 24px 24px;
   font-family: Georgia, serif;
   color: #2a2219;
   border: 2px solid #2a2219;
+  box-sizing: border-box;
 }
 .np-top-rule { border-top: 4px solid #2a2219; border-bottom: 1.5px solid #2a2219; padding: 3px 0; margin-bottom: 0; }
 .np-mid-rule { border-top: 1.5px solid #2a2219; border-bottom: 4px solid #2a2219; padding: 3px 0; margin: 0; }
@@ -291,20 +295,46 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 @media (max-width: 768px) {
   nav { padding: 1rem 1.25rem; }
   .nav-links { display: none; }
-  .hero { grid-template-columns: 1fr; padding: 2rem 1.25rem 0; gap: 0; }
-  .hero-left { padding-bottom: 2rem; }
+  .hero { grid-template-columns: 1fr; padding: 1.5rem 1rem 0; gap: 0; }
+  .hero-left { padding-bottom: 1.5rem; }
   .hero-right {
-    height: 75vw;
-    min-height: 320px;
-    max-height: 520px;
+    height: auto;
+    min-height: unset;
+    max-height: unset;
     width: 100%;
+    overflow: visible;
+    display: block;
+    position: relative;
+    padding-bottom: 2rem;
   }
   .newspaper {
-    width: 90vw;
-    left: 50%;
-    margin-left: -45vw;
-    top: 30px;
+    position: relative;
+    width: 100%;
+    left: auto;
+    margin-left: 0;
+    top: auto;
+    transform: none;
+    transform-origin: unset;
+    height: auto;
+    overflow: visible;
+    box-shadow: 4px 4px 0 #C8BFA8, 0 4px 16px rgba(0,0,0,0.15);
   }
+  .np-paper {
+    height: auto;
+    overflow: visible;
+    padding: 0 4vw 24px;
+  }
+  .np-masthead-title { font-size: 8vw !important; white-space: normal !important; }
+  .np-big-headline { font-size: 10vw !important; }
+  .np-col-hed { font-size: 2.8vw !important; }
+  .np-body-text { font-size: 2.4vw !important; line-height: 1.6 !important; }
+  .np-dropcap-big { font-size: 9vw !important; }
+  .np-meta-row { font-size: 2vw !important; }
+  .np-meta-star { font-size: 3vw !important; }
+  .np-pullquote-box p { font-size: 2.4vw !important; }
+  .np-photo-cap { font-size: 2.2vw !important; }
+  .np-photo-label { font-size: 2.4vw !important; }
+  .np-photo-box { height: 35vw !important; }
   .feature-card { grid-template-columns: 1fr; }
   .story-grid { grid-template-columns: 1fr; }
   .amount-grid { grid-template-columns: repeat(2,1fr); }
@@ -313,14 +343,6 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   .newsletter-banner { flex-direction: column; }
   .nl-form { flex-direction: column; width: 100%; }
   .nl-input { width: 100%; }
-  .np-masthead-title { font-size: 6vw !important; }
-  .np-big-headline { font-size: 8vw !important; }
-  .np-col-hed { font-size: 1.4vw !important; }
-  .np-body-text { font-size: 1.2vw !important; }
-  .np-dropcap-big { font-size: 7vw !important; }
-  .np-meta-row { font-size: 1.2vw !important; }
-  .np-pullquote-box p { font-size: 1.2vw !important; }
-  .np-photo-cap { font-size: 1.1vw !important; }
 }
 </style>
 </head>
@@ -545,12 +567,12 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
       <p>Every week, the person who shares their story chooses a charity close to their heart. We display it here — because purpose doesn't end with the story.</p>
     </div>
     <div class="charity-spotlight">
-      <div class="charity-icon">🏥</div>
+      <div class="charity-icon" id="donate-charity-icon">🏥</div>
       <div class="charity-info">
-        <span class="charity-tag">Dr. Reyna's Pick · This Week</span>
-        <h3>Doctors Without Borders</h3>
-        <p>Reyna chose MSF because it represents medicine as she believes it should be — driven purely by need. "No insurance forms, no billing. Just care. That's why I became a doctor."</p>
-        <span class="charity-tag" style="color:var(--terracotta);">doctors without borders · msf.org</span>
+        <span class="charity-tag" id="donate-charity-tag">Dr. Reyna's Pick · This Week</span>
+        <h3 id="donate-charity-name">Doctors Without Borders</h3>
+        <p id="donate-charity-why">Reyna chose MSF because it represents medicine as she believes it should be — driven purely by need. "No insurance forms, no billing. Just care. That's why I became a doctor."</p>
+        <a id="donate-charity-link" href="https://msf.org" target="_blank" rel="noopener" class="charity-tag" style="color:var(--terracotta);text-decoration:none;">doctors without borders · msf.org</a>
       </div>
     </div>
     <div class="amount-grid">
@@ -559,7 +581,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
       <div class="amount-btn" onclick="selectAmount(this)"><div class="amt">$50</div><div class="sub">bright light</div></div>
       <div class="amount-btn" onclick="selectAmount(this)"><div class="amt">$100</div><div class="sub">blazing</div></div>
     </div>
-    <button class="donate-cta">Donate to Doctors Without Borders ♥</button>
+    <a id="donate-cta-link" href="https://msf.org" target="_blank" rel="noopener" class="donate-cta" style="text-decoration:none;display:block;text-align:center;">Donate to Doctors Without Borders ♥</a>
     <div class="past-charities">
       <h3>Past weeks' causes</h3>
       <div class="past-row"><div class="past-emoji">👨‍🍳</div><div class="past-info"><div class="pname">No Kid Hungry</div><div class="pwho">Chosen by Marcus Lee · Chef</div></div><div class="past-raised">$2,340 raised</div></div>
@@ -799,7 +821,28 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 </div>
 
 <script>
-function newspaperClick() {
+function updateDonatePage(s) {
+  if (!s) return;
+  const url = s.charityUrl || s.charity_url || '';
+  const fullUrl = url && !url.startsWith('http') ? 'https://' + url : url;
+  const name = s.charity || s.charityName || 'Doctors Without Borders';
+  const firstName = (s.name || '').split(' ')[0];
+
+  document.getElementById('donate-charity-tag').textContent = firstName + '\u2019s Pick \u00b7 This Week';
+  document.getElementById('donate-charity-name').textContent = name;
+  document.getElementById('donate-charity-why').textContent = s.charityWhy || s.charity_why || '';
+  document.getElementById('donate-charity-icon').textContent = s.emoji || '\u2665';
+
+  const linkEl = document.getElementById('donate-charity-link');
+  linkEl.textContent = name.toLowerCase() + (url ? ' \u00b7 ' + url : '');
+  if (fullUrl) linkEl.href = fullUrl;
+
+  const ctaEl = document.getElementById('donate-cta-link');
+  ctaEl.textContent = 'Donate to ' + name + ' \u2665';
+  if (fullUrl) ctaEl.href = fullUrl;
+}
+
+// ── CORE ──────────────────────────────────────────────────────────
   if (stories && stories.length > 0) {
     openDynamicArticle(stories[0]);
   } else {
@@ -808,7 +851,7 @@ function newspaperClick() {
 }
 
 // ── CORE ──────────────────────────────────────────────────────────
-function showPage(id) {
+function newspaperClick() {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
@@ -1047,6 +1090,7 @@ function _finishAdminSave(idx, story) {
   if (stories.length > 0) {
     const s = stories[0];
     updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, calling: s.body, charity: s.charity, photo: s.photo });
+    updateDonatePage(s);
   }
 }
 
@@ -1157,7 +1201,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // If admin has published stories, show the latest one in the newspaper
   if (stories.length > 0) {
     const s = stories[0];
-    updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, charity: s.charity });
+    updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, charity: s.charity, photo: s.photo });
+    updateDonatePage(s);
   }
 });
 </script>
