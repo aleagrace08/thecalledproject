@@ -38,16 +38,16 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .page.active { display: block; }
 
 /* HERO */
-.hero { display: grid; grid-template-columns: 1fr 1.4fr; align-items: start; padding: 3rem 2.5rem 3rem 2rem; gap: 1.5rem; position: relative; }
+.hero { display: grid; grid-template-columns: 1fr 1.4fr; align-items: center; padding: 3rem 2.5rem 3rem 2rem; gap: 1.5rem; position: relative; }
 .hero-left { position: relative; z-index: 2; }
 .hero-tag { display: inline-block; background: var(--lavender); color: #4A3F7A; font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.9rem; border-radius: 100px; margin-bottom: 1.2rem; letter-spacing: 0.05em; text-transform: uppercase; }
 .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 1.2rem; }
 .hero h1 em { color: var(--terracotta); font-style: italic; }
 .hero p { font-size: 1.05rem; color: var(--muted); line-height: 1.7; max-width: 440px; margin-bottom: 2rem; }
-.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-.btn-primary { background: var(--ink); color: var(--white); border: none; padding: 0.75rem 1.8rem; border-radius: 100px; font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: transform 0.2s; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: nowrap; }
+.btn-primary { background: var(--ink); color: var(--white); border: none; padding: 0.6rem 1.2rem; border-radius: 100px; font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: transform 0.2s; white-space: nowrap; }
 .btn-primary:hover { transform: translateY(-2px); }
-.btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--sand); padding: 0.75rem 1.8rem; border-radius: 100px; font-size: 0.9rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; }
+.btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--sand); padding: 0.6rem 1.2rem; border-radius: 100px; font-size: 0.82rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; white-space: nowrap; }
 .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); }
 
 /* NEWSPAPER SCENE */
@@ -481,7 +481,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 
   <footer>
     <div class="footer-brand">
-      <div class="logo" style="cursor:default;color:var(--cream);">Called<span>.</span></div>
+      <div class="logo" id="footerLogo" style="cursor:default;color:var(--cream);">Called<span>.</span></div>
       <p>Stories of purpose, told by the people living them. One profession at a time.</p>
     </div>
     <div class="footer-col">
@@ -496,7 +496,6 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     <div class="footer-col">
       <h4>Connect</h4>
       <ul><li>Instagram</li><li>TikTok</li><li>Newsletter</li></ul>
-      <span onclick="document.getElementById('adminLogin').style.display='flex'" style="font-size:0.5rem;color:#2C2927;cursor:pointer;display:block;margin-top:1rem;">·</span>
     </div>
   </footer>
 </div>
@@ -1183,6 +1182,23 @@ function closeAdmin() { document.getElementById('adminPanel').style.display = 'n
 
 // On load
 document.addEventListener('DOMContentLoaded', () => {
+  // Triple-click the footer "Called." logo to open admin (hidden from visitors)
+  let footerClicks = 0;
+  let footerTimer = null;
+  const footerLogo = document.getElementById('footerLogo');
+  if (footerLogo) {
+    footerLogo.addEventListener('click', () => {
+      footerClicks++;
+      clearTimeout(footerTimer);
+      footerTimer = setTimeout(() => { footerClicks = 0; }, 700);
+      if (footerClicks >= 3) {
+        footerClicks = 0;
+        if (!sessionStorage.getItem('called_admin')) {
+          document.getElementById('adminLogin').style.display = 'flex';
+        }
+      }
+    });
+  }
   if (sessionStorage.getItem('called_admin')) {
     document.getElementById('adminBar').style.display = 'flex';
     renderAdminStoriesList();
