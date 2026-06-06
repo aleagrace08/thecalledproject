@@ -38,7 +38,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .page.active { display: block; }
 
 /* HERO */
-.hero { display: grid; grid-template-columns: 1fr 1.4fr; align-items: center; padding: 3rem 2.5rem 3rem 2rem; gap: 1.5rem; position: relative; overflow: hidden; }
+.hero { display: grid; grid-template-columns: 1fr 1.4fr; align-items: start; padding: 3rem 2.5rem 3rem 2rem; gap: 1.5rem; position: relative; }
 .hero-left { position: relative; z-index: 2; }
 .hero-tag { display: inline-block; background: var(--lavender); color: #4A3F7A; font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.9rem; border-radius: 100px; margin-bottom: 1.2rem; letter-spacing: 0.05em; text-transform: uppercase; }
 .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 1.2rem; }
@@ -51,7 +51,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); }
 
 /* NEWSPAPER SCENE */
-.hero-right { position: relative; height: 870px; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; }
+.hero-right { position: relative; height: 860px; display: flex; align-items: flex-start; justify-content: center; overflow: visible; }
 .scene-bg { display: none; }
 
 /* NEWSPAPER */
@@ -60,7 +60,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 /* NEWSPAPER STYLED */
 .newspaper {
   position: absolute;
-  top: 30px;
+  top: 55px;
   left: 50%;
   margin-left: -290px;
   width: 580px;
@@ -350,7 +350,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 
 <!-- NAV -->
 <nav>
-  <div class="logo" onclick="showPage('home')">Called<span>.</span></div>
+  <div class="logo" onclick="showPage('home')" id="siteLogo">Called<span>.</span></div>
   <ul class="nav-links">
     <li><a onclick="showPage('home')">Home</a></li>
     <li><a onclick="showPage('stories')">Stories</a></li>
@@ -496,6 +496,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     <div class="footer-col">
       <h4>Connect</h4>
       <ul><li>Instagram</li><li>TikTok</li><li>Newsletter</li></ul>
+      <span onclick="document.getElementById('adminLogin').style.display='flex'" style="font-size:0.5rem;color:#2C2927;cursor:pointer;display:block;margin-top:1rem;">·</span>
     </div>
   </footer>
 </div>
@@ -843,15 +844,14 @@ function updateDonatePage(s) {
 }
 
 // ── CORE ──────────────────────────────────────────────────────────
+function newspaperClick() {
   if (stories && stories.length > 0) {
     openDynamicArticle(stories[0]);
   } else {
     showPage('article');
   }
 }
-
-// ── CORE ──────────────────────────────────────────────────────────
-function newspaperClick() {
+function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
@@ -1181,16 +1181,6 @@ function adminSignOut() {
 }
 function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
 
-// Secret key combo: Shift + A + D
-const adminKeys = new Set();
-document.addEventListener('keydown', e => {
-  adminKeys.add(e.key);
-  if (adminKeys.has('A') && adminKeys.has('D') && adminKeys.has('Shift')) {
-    if (!sessionStorage.getItem('called_admin')) document.getElementById('adminLogin').style.display = 'flex';
-  }
-});
-document.addEventListener('keyup', e => adminKeys.delete(e.key));
-
 // On load
 document.addEventListener('DOMContentLoaded', () => {
   if (sessionStorage.getItem('called_admin')) {
@@ -1198,7 +1188,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAdminStoriesList();
   }
   renderPublicStories();
-  // If admin has published stories, show the latest one in the newspaper
   if (stories.length > 0) {
     const s = stories[0];
     updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, charity: s.charity, photo: s.photo });
