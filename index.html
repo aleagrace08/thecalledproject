@@ -659,20 +659,6 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
       </div>
     </div>
     <div id="journalEntries">
-      <div class="entry-card">
-        <div class="entry-date">June 3, 2025</div>
-        <div class="entry-title">First interview jitters</div>
-        <div class="entry-body">I interviewed Dr. Reyna today for the first story. I was so nervous I spilled my coffee before we even started. She was incredibly gracious — and by the end I was genuinely moved. She cried talking about her first patient. I cried a little too. Is that okay? I think it's okay. This is working.</div>
-        <div class="entry-mood">🥹</div>
-        <button class="entry-delete-btn" onclick="deleteEntry(this)">✕ Delete</button>
-      </div>
-      <div class="entry-card">
-        <div class="entry-date">May 28, 2025</div>
-        <div class="entry-title">Why I started this</div>
-        <div class="entry-body">I was sitting across from my doctor during a routine checkup and she mentioned — almost in passing — that she almost became an architect. Something in me lit up. I wanted to know everything. The pivot, the moment, the doubt. That's when I knew Called. needed to exist. Everyone has a story about their calling, and almost no one tells it.</div>
-        <div class="entry-mood">🌱</div>
-        <button class="entry-delete-btn" onclick="deleteEntry(this)">✕ Delete</button>
-      </div>
     </div>
   </div>
 </div>
@@ -823,11 +809,12 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
         <div class="notice-icon">🕐</div>
         <p><strong>We'll be in touch within one week.</strong> Every submission is read personally. If your story is a good fit, we'll reach out before anything is published. Nothing goes live without your approval.</p>
       </div>
-      <div class="consent-row">
-        <input type="checkbox" id="f-consent" />
+      <div class="consent-row" id="consentRow">
+        <input type="checkbox" id="f-consent" onchange="updateConsentState()" />
         <label for="f-consent">I give Called. permission to publish my story and understand that the team may reach out to develop it further before anything goes live. My contact details will never be shared.</label>
       </div>
-      <button class="submit-form-btn" id="submitBtn" onclick="submitStory()">Send My Story →</button>
+      <p id="consent-error" style="display:none;color:#DC2626;font-size:0.8rem;margin-bottom:0.75rem;font-family:'DM Sans',sans-serif;">You must check the box above before submitting.</p>
+      <button class="submit-form-btn" id="submitBtn" onclick="submitStory()" style="opacity:0.5;cursor:not-allowed;">Send My Story →</button>
     </div>
     <div class="submit-success" id="submitSuccess">
       <div class="big-icon">✦</div>
@@ -978,17 +965,45 @@ function loadPledgeForCharity(charityName) {
     document.getElementById('pledgeBar').style.width = '0%';
   }
 }
+function updateConsentState() {
+  const checked = document.getElementById('f-consent').checked;
+  const btn = document.getElementById('submitBtn');
+  btn.style.opacity = checked ? '1' : '0.5';
+  btn.style.cursor = checked ? 'pointer' : 'not-allowed';
+  if (checked) {
+    document.getElementById('consentRow').style.borderColor = '';
+    document.getElementById('consent-error').style.display = 'none';
+  }
+}
 function saveEntry() {
   const title = document.getElementById('journalTitle').value.trim();
   const body  = document.getElementById('journalBody').value.trim();
   if (!title && !body) return;
   const dateStr = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
-  const el = document.createElement('div');
-  el.className = 'entry-card';
-  el.innerHTML = `<div class="entry-date">${dateStr}</div><div class="entry-title">${title||'Untitled'}</div><div class="entry-body">${body||'…'}</div><div class="entry-mood">✍️</div><button class="entry-delete-btn" onclick="deleteEntry(this)" style="display:inline-block;">✕ Delete</button>`;
-  document.getElementById('journalEntries').prepend(el);
+  const id = 'je_' + Date.now();
+  const entry = { id, title: title || 'Untitled', body: body || '…', date: dateStr, mood: '✍️' };
+  const entries = JSON.parse(localStorage.getItem('journal_entries') || '[]');
+  entries.unshift(entry);
+  localStorage.setItem('journal_entries', JSON.stringify(entries));
+  renderJournalEntry(entry, true);
   document.getElementById('journalTitle').value = '';
   document.getElementById('journalBody').value  = '';
+}
+
+function renderJournalEntry(entry, prepend) {
+  const isAdmin = !!sessionStorage.getItem('called_admin');
+  const el = document.createElement('div');
+  el.className = 'entry-card';
+  el.dataset.jid = entry.id;
+  el.innerHTML = `<div class="entry-date">${entry.date}</div><div class="entry-title">${entry.title}</div><div class="entry-body">${entry.body}</div><div class="entry-mood">${entry.mood}</div><button class="entry-delete-btn" onclick="deleteEntry(this)" style="display:${isAdmin ? 'inline-block' : 'none'};">✕ Delete</button>`;
+  const container = document.getElementById('journalEntries');
+  if (prepend) container.insertBefore(el, container.firstChild);
+  else container.appendChild(el);
+}
+
+function loadJournalEntries() {
+  const entries = JSON.parse(localStorage.getItem('journal_entries') || '[]');
+  entries.forEach(e => renderJournalEntry(e, false));
 }
 function filterStories(specialty, pill) {
   document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
@@ -1080,8 +1095,12 @@ async function submitStory() {
     el.style.borderColor = '';
   }
   if (!document.getElementById('f-consent').checked) {
-    document.querySelector('.consent-row').style.borderColor = 'var(--terracotta)'; return;
+    document.getElementById('consentRow').style.borderColor = 'var(--terracotta)';
+    document.getElementById('consent-error').style.display = 'block';
+    document.getElementById('consentRow').scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
   }
+  document.getElementById('consent-error').style.display = 'none';
   const fieldEmojis = {
     'Medicine & Healthcare': '🩺', 'Law & Justice': '⚖️', 'Education': '📚',
     'Technology': '💻', 'Arts & Design': '🎨', 'Culinary & Hospitality': '👨‍🍳',
@@ -1329,7 +1348,14 @@ function setStaticDeleteMode(isAdmin) {
 
 function deleteEntry(btn) {
   if (!confirm('Delete this journal entry?')) return;
-  btn.closest('.entry-card').remove();
+  const card = btn.closest('.entry-card');
+  const jid = card.dataset.jid;
+  if (jid) {
+    const entries = JSON.parse(localStorage.getItem('journal_entries') || '[]');
+    const updated = entries.filter(e => e.id !== jid);
+    localStorage.setItem('journal_entries', JSON.stringify(updated));
+  }
+  card.remove();
 }
 
 function deleteStaticCard(event, btn) {
@@ -1370,14 +1396,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+  renderPublicStories();
+  applyHiddenStaticCards();
+  loadJournalEntries();
   if (sessionStorage.getItem('called_admin')) {
     document.getElementById('adminBar').style.display = 'flex';
     renderAdminStoriesList();
     setJournalAdminMode(true);
     setStaticDeleteMode(true);
   }
-  renderPublicStories();
-  applyHiddenStaticCards();
   if (stories.length > 0) {
     const s = stories[0];
     updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, calling: s.body, charity: s.charity, photo: s.photo });
