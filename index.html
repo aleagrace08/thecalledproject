@@ -371,15 +371,35 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   }
   .np-meta-star { font-size: clamp(10px, 3vw, 13px) !important; }
 
-  /* Two-column layout — keep side by side, proportional padding */
+  /* Two-column layout — stretch both cols to same height, no empty space */
   .np-two-col {
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
+    align-items: stretch;
     gap: 0;
   }
-  .np-col-l { padding: 0 8px 0 0; }
-  .np-col-r { padding: 0 0 0 8px; }
-  .np-col-rule { margin: 0 6px; }
+  .np-col-l {
+    padding: 0 8px 0 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .np-col-r {
+    padding: 0 0 0 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Pullquote stretches to fill leftover space in left col */
+  .np-col-l .np-pullquote-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Also This Issue body fills leftover space in right col */
+  .np-col-r #np-also {
+    flex: 1;
+  }
+  .np-col-rule { margin: 0 6px; align-self: stretch; }
 
   /* Column headline */
   .np-col-hed {
