@@ -318,116 +318,125 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   }
   .hero-left { padding-bottom: 1.5rem; }
 
-  /* Newspaper container */
+  /* Newspaper container — no extra height, no overflow issues */
   .hero-right {
     height: auto;
     width: 100%;
     overflow: visible;
     display: block;
     position: relative;
-    padding: 0 0 2.5rem;
+    padding: 0 0 2rem;
   }
 
-  /* Newspaper itself — flat, full-width, readable */
+  /* Newspaper — flat, no tilt, full width, height fills content naturally */
   .newspaper {
     position: relative;
-    width: 92vw;
-    max-width: 420px;
+    width: 96vw;
+    max-width: 480px;
     height: auto;
     left: auto;
     margin: 0 auto;
     top: auto;
-    transform: rotate(-2deg);
-    transform-origin: top center;
+    transform: none;
+    transform-origin: unset;
     overflow: visible;
-    box-shadow: 4px 6px 0 #C8BFA8, 0 8px 24px rgba(0,0,0,0.15);
+    box-shadow: 3px 4px 0 #C8BFA8, 0 6px 20px rgba(0,0,0,0.14);
     border-radius: 2px;
   }
   .np-paper {
     height: auto;
     overflow: visible;
-    padding: 12px 14px 20px;
+    padding: 10px 12px 16px;
   }
 
-  /* Masthead */
+  /* Masthead — readable but compact */
   .np-masthead-title {
-    font-size: clamp(22px, 7vw, 32px) !important;
+    font-size: clamp(20px, 6.5vw, 30px) !important;
     white-space: normal !important;
     letter-spacing: 0.5px !important;
   }
 
-  /* Big headline */
+  /* Big headline — prominent but not overflowing */
   .np-big-headline {
-    font-size: clamp(22px, 8.5vw, 40px) !important;
-    line-height: 1 !important;
-    padding: 8px 2px 6px !important;
+    font-size: clamp(20px, 7.5vw, 36px) !important;
+    line-height: 1.0 !important;
+    padding: 7px 2px 5px !important;
+    letter-spacing: -0.5px !important;
   }
 
   /* Meta row */
   .np-meta-row {
-    font-size: clamp(6px, 2vw, 9px) !important;
+    font-size: clamp(6.5px, 2.1vw, 9px) !important;
     letter-spacing: 0.8px !important;
   }
-  .np-meta-star { font-size: clamp(10px, 3vw, 14px) !important; }
+  .np-meta-star { font-size: clamp(10px, 3vw, 13px) !important; }
 
-  /* Two-column layout — stack on very small, side-by-side on medium mobile */
+  /* Two-column layout — keep side by side, proportional padding */
   .np-two-col {
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
     gap: 0;
   }
-  .np-col-l, .np-col-r { padding: 0 8px 0 0; }
+  .np-col-l { padding: 0 8px 0 0; }
   .np-col-r { padding: 0 0 0 8px; }
-  .np-col-rule { margin: 0 8px; }
+  .np-col-rule { margin: 0 6px; }
 
   /* Column headline */
   .np-col-hed {
-    font-size: clamp(7px, 2.2vw, 10px) !important;
-    margin-bottom: 6px !important;
+    font-size: clamp(7px, 2.3vw, 10px) !important;
+    margin-bottom: 5px !important;
+    line-height: 1.25 !important;
   }
 
-  /* Body text */
+  /* Body text — scaled to be readable but dense like a real newspaper */
   .np-body-text {
-    font-size: clamp(6.5px, 2vw, 9px) !important;
-    line-height: 1.55 !important;
+    font-size: clamp(7px, 2.1vw, 9.5px) !important;
+    line-height: 1.6 !important;
   }
   .np-body-text p { margin-bottom: 5px !important; }
-  .np-body-text strong { font-size: inherit !important; }
+  .np-body-text strong { font-style: normal !important; font-size: inherit !important; }
 
   /* Dropcap */
   .np-dropcap-big {
-    font-size: clamp(28px, 9vw, 42px) !important;
+    font-size: clamp(30px, 9.5vw, 44px) !important;
     margin-right: 2px !important;
+    line-height: 0.72 !important;
   }
 
   /* Pullquote */
   .np-pullquote-box {
-    padding: 8px 10px !important;
-    margin-top: 8px !important;
+    padding: 7px 9px !important;
+    margin-top: 7px !important;
   }
   .np-pullquote-box p {
-    font-size: clamp(6.5px, 2vw, 9px) !important;
+    font-size: clamp(7px, 2.1vw, 9px) !important;
+    line-height: 1.5 !important;
   }
 
-  /* Photo */
+  /* Photo — proportional height, fills column */
   .np-photo-box {
-    height: clamp(80px, 22vw, 140px) !important;
+    height: clamp(75px, 21vw, 130px) !important;
+    margin-bottom: 6px !important;
   }
   .np-photo-label {
-    font-size: clamp(7px, 2.2vw, 10px) !important;
+    font-size: clamp(7px, 2.1vw, 9.5px) !important;
     padding: 4px 6px !important;
+    line-height: 1.4 !important;
   }
   .np-photo-cap {
     font-size: clamp(6px, 1.8vw, 8px) !important;
-    margin-bottom: 7px !important;
+    margin-bottom: 6px !important;
+    line-height: 1.4 !important;
   }
 
-  /* Rules */
+  /* Rules — slightly thinner on mobile */
   .np-top-rule, .np-mid-rule, .np-section-rule-top,
   .np-section-rule-bot, .np-bottom-rules, .np-footer-rule {
     border-top-width: 2.5px !important;
     border-bottom-width: 1px !important;
+    padding: 2px 0 !important;
   }
+  .np-masthead-wrap { padding: 7px 0 4px !important; }
 
   /* Rest of page */
   .feature-card { grid-template-columns: 1fr; }
@@ -446,13 +455,14 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     grid-template-columns: 1fr;
   }
   .np-col-rule { display: none; }
-  .np-col-r { padding: 8px 0 0; border-top: 1px solid #2a2219; margin-top: 8px; }
-  .np-col-l { padding: 0; }
-  .np-masthead-title { font-size: 8vw !important; }
-  .np-big-headline { font-size: 9.5vw !important; }
-  .np-body-text { font-size: 2.8vw !important; }
-  .np-col-hed { font-size: 2.8vw !important; }
-  .np-dropcap-big { font-size: 10vw !important; }
+  .np-col-r { padding: 8px 0 0 !important; border-top: 1px solid #2a2219; margin-top: 8px; }
+  .np-col-l { padding: 0 !important; }
+  .np-masthead-title { font-size: 8.5vw !important; }
+  .np-big-headline { font-size: 10vw !important; letter-spacing: -0.5px !important; }
+  .np-body-text { font-size: 3vw !important; }
+  .np-col-hed { font-size: 3vw !important; }
+  .np-dropcap-big { font-size: 11vw !important; }
+  .np-photo-box { height: 28vw !important; }
 }
 </style>
 </head>
@@ -1324,8 +1334,20 @@ function deleteEntry(btn) {
 
 function deleteStaticCard(event, btn) {
   event.stopPropagation();
-  if (!confirm('Remove this story card? This only hides it until the page reloads.')) return;
-  btn.closest('.story-card').remove();
+  if (!confirm('Permanently remove this story card?')) return;
+  const card = btn.closest('.story-card');
+  const title = card.querySelector('.card-title') ? card.querySelector('.card-title').textContent.trim() : '';
+  const hidden = JSON.parse(localStorage.getItem('hidden_static_cards') || '[]');
+  if (!hidden.includes(title)) { hidden.push(title); localStorage.setItem('hidden_static_cards', JSON.stringify(hidden)); }
+  card.remove();
+}
+
+function applyHiddenStaticCards() {
+  const hidden = JSON.parse(localStorage.getItem('hidden_static_cards') || '[]');
+  document.querySelectorAll('.static-story-card').forEach(card => {
+    const title = card.querySelector('.card-title') ? card.querySelector('.card-title').textContent.trim() : '';
+    if (hidden.includes(title)) card.remove();
+  });
 }
 
 function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
@@ -1355,6 +1377,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setStaticDeleteMode(true);
   }
   renderPublicStories();
+  applyHiddenStaticCards();
   if (stories.length > 0) {
     const s = stories[0];
     updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, calling: s.body, charity: s.charity, photo: s.photo });
