@@ -50,14 +50,10 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--sand); padding: 0.6rem 1.2rem; border-radius: 100px; font-size: 0.82rem; font-weight: 500; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; white-space: nowrap; }
 .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); }
 
-/* NEWSPAPER SCENE */
+/* NEWSPAPER SCENE — DESKTOP */
 .hero-right { position: relative; height: 860px; display: flex; align-items: flex-start; justify-content: center; overflow: visible; }
 .scene-bg { display: none; }
 
-/* NEWSPAPER */
-
-
-/* NEWSPAPER STYLED */
 .newspaper {
   position: absolute;
   top: 55px;
@@ -70,6 +66,7 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
   transform-origin: top center;
   box-shadow: 8px 8px 0 #C8BFA8, 18px 18px 0 rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.18);
   overflow: hidden;
+  cursor: pointer;
 }
 .np-paper {
   background: #EAE2CC;
@@ -292,58 +289,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 .asr-delete { background: #FEE2E2; color: #DC2626; border: none; padding: 0.35rem 0.9rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
 .admin-empty { color: var(--muted); font-size: 0.88rem; text-align: center; padding: 2rem; }
 
-@media (max-width: 768px) {
-  nav { padding: 1rem 1.25rem; }
-  .nav-links { display: none; }
-  .hero { grid-template-columns: 1fr; padding: 1.5rem 1rem 0; gap: 0; }
-  .hero-left { padding-bottom: 1.5rem; }
-  .hero-right {
-    height: auto;
-    min-height: unset;
-    max-height: unset;
-    width: 100%;
-    overflow: visible;
-    display: block;
-    position: relative;
-    padding-bottom: 2rem;
-  }
-  .newspaper {
-    position: relative;
-    width: 100%;
-    left: auto;
-    margin-left: 0;
-    top: auto;
-    transform: none;
-    transform-origin: unset;
-    height: auto;
-    overflow: visible;
-    box-shadow: 4px 4px 0 #C8BFA8, 0 4px 16px rgba(0,0,0,0.15);
-  }
-  .np-paper {
-    height: auto;
-    overflow: visible;
-    padding: 0 4vw 24px;
-  }
-  .np-masthead-title { font-size: 8vw !important; white-space: normal !important; }
-  .np-big-headline { font-size: 10vw !important; }
-  .np-col-hed { font-size: 2.8vw !important; }
-  .np-body-text { font-size: 2.4vw !important; line-height: 1.6 !important; }
-  .np-dropcap-big { font-size: 9vw !important; }
-  .np-meta-row { font-size: 2vw !important; }
-  .np-meta-star { font-size: 3vw !important; }
-  .np-pullquote-box p { font-size: 2.4vw !important; }
-  .np-photo-cap { font-size: 2.2vw !important; }
-  .np-photo-label { font-size: 2.4vw !important; }
-  .np-photo-box { height: 35vw !important; }
-  .feature-card { grid-template-columns: 1fr; }
-  .story-grid { grid-template-columns: 1fr; }
-  .amount-grid { grid-template-columns: repeat(2,1fr); }
-  .field-row { grid-template-columns: 1fr; }
-  footer { grid-template-columns: 1fr; }
-  .newsletter-banner { flex-direction: column; }
-  .nl-form { flex-direction: column; width: 100%; }
-  .nl-input { width: 100%; }
-}
+/* DONATE EXTRAS */
 .custom-amount-wrap { max-width: 640px; margin: 0 auto 1.5rem; }
 .custom-amount-input { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--ink); border: 1.5px solid var(--sand); border-radius: 12px; padding: 0.7rem 1rem; background: var(--cream); outline: none; transition: border-color 0.2s; width: 100%; }
 .custom-amount-input:focus { border-color: var(--terracotta); background: var(--white); }
@@ -355,6 +301,156 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 .pledge-bar { background: var(--terracotta); height: 100%; border-radius: 100px; transition: width 0.6s ease; width: 0%; }
 .donate-thanks { display: none; text-align: center; max-width: 640px; margin: 0 auto 1.5rem; background: #F0FFF4; border: 1px solid var(--sage); border-radius: 16px; padding: 1rem 1.5rem; font-size: 0.9rem; color: var(--ink); }
 
+/* ── MOBILE ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links { display: none; }
+
+  /* Hero stacks vertically, newspaper below the text */
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1rem 0;
+    gap: 0;
+    min-height: unset;
+  }
+  .hero-left { padding-bottom: 1.5rem; }
+
+  /* Newspaper container */
+  .hero-right {
+    height: auto;
+    width: 100%;
+    overflow: visible;
+    display: block;
+    position: relative;
+    padding: 0 0 2.5rem;
+  }
+
+  /* Newspaper itself — flat, full-width, readable */
+  .newspaper {
+    position: relative;
+    width: 92vw;
+    max-width: 420px;
+    height: auto;
+    left: auto;
+    margin: 0 auto;
+    top: auto;
+    transform: rotate(-2deg);
+    transform-origin: top center;
+    overflow: visible;
+    box-shadow: 4px 6px 0 #C8BFA8, 0 8px 24px rgba(0,0,0,0.15);
+    border-radius: 2px;
+  }
+  .np-paper {
+    height: auto;
+    overflow: visible;
+    padding: 12px 14px 20px;
+  }
+
+  /* Masthead */
+  .np-masthead-title {
+    font-size: clamp(22px, 7vw, 32px) !important;
+    white-space: normal !important;
+    letter-spacing: 0.5px !important;
+  }
+
+  /* Big headline */
+  .np-big-headline {
+    font-size: clamp(22px, 8.5vw, 40px) !important;
+    line-height: 1 !important;
+    padding: 8px 2px 6px !important;
+  }
+
+  /* Meta row */
+  .np-meta-row {
+    font-size: clamp(6px, 2vw, 9px) !important;
+    letter-spacing: 0.8px !important;
+  }
+  .np-meta-star { font-size: clamp(10px, 3vw, 14px) !important; }
+
+  /* Two-column layout — stack on very small, side-by-side on medium mobile */
+  .np-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+  }
+  .np-col-l, .np-col-r { padding: 0 8px 0 0; }
+  .np-col-r { padding: 0 0 0 8px; }
+  .np-col-rule { margin: 0 8px; }
+
+  /* Column headline */
+  .np-col-hed {
+    font-size: clamp(7px, 2.2vw, 10px) !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* Body text */
+  .np-body-text {
+    font-size: clamp(6.5px, 2vw, 9px) !important;
+    line-height: 1.55 !important;
+  }
+  .np-body-text p { margin-bottom: 5px !important; }
+  .np-body-text strong { font-size: inherit !important; }
+
+  /* Dropcap */
+  .np-dropcap-big {
+    font-size: clamp(28px, 9vw, 42px) !important;
+    margin-right: 2px !important;
+  }
+
+  /* Pullquote */
+  .np-pullquote-box {
+    padding: 8px 10px !important;
+    margin-top: 8px !important;
+  }
+  .np-pullquote-box p {
+    font-size: clamp(6.5px, 2vw, 9px) !important;
+  }
+
+  /* Photo */
+  .np-photo-box {
+    height: clamp(80px, 22vw, 140px) !important;
+  }
+  .np-photo-label {
+    font-size: clamp(7px, 2.2vw, 10px) !important;
+    padding: 4px 6px !important;
+  }
+  .np-photo-cap {
+    font-size: clamp(6px, 1.8vw, 8px) !important;
+    margin-bottom: 7px !important;
+  }
+
+  /* Rules */
+  .np-top-rule, .np-mid-rule, .np-section-rule-top,
+  .np-section-rule-bot, .np-bottom-rules, .np-footer-rule {
+    border-top-width: 2.5px !important;
+    border-bottom-width: 1px !important;
+  }
+
+  /* Rest of page */
+  .feature-card { grid-template-columns: 1fr; }
+  .story-grid { grid-template-columns: 1fr; }
+  .amount-grid { grid-template-columns: repeat(2,1fr); }
+  .field-row { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; }
+  .newsletter-banner { flex-direction: column; }
+  .nl-form { flex-direction: column; width: 100%; }
+  .nl-input { width: 100%; }
+}
+
+/* Very small phones — single column newspaper */
+@media (max-width: 400px) {
+  .np-two-col {
+    grid-template-columns: 1fr;
+  }
+  .np-col-rule { display: none; }
+  .np-col-r { padding: 8px 0 0; border-top: 1px solid #2a2219; margin-top: 8px; }
+  .np-col-l { padding: 0; }
+  .np-masthead-title { font-size: 8vw !important; }
+  .np-big-headline { font-size: 9.5vw !important; }
+  .np-body-text { font-size: 2.8vw !important; }
+  .np-col-hed { font-size: 2.8vw !important; }
+  .np-dropcap-big { font-size: 10vw !important; }
+}
 </style>
 </head>
 <body>
@@ -386,8 +482,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     </div>
 
     <div class="hero-right">
-      <!-- NEWSPAPER -->
-      <div class="newspaper" id="mainNewspaper" onclick="newspaperClick()" style="cursor:pointer;">
+      <div class="newspaper" id="mainNewspaper" onclick="newspaperClick()">
         <div class="np-paper">
           <div class="np-top-rule"></div>
           <div class="np-masthead-wrap">
@@ -435,7 +530,6 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
           <div class="np-footer-rule"></div>
         </div>
       </div>
-      <!-- END NEWSPAPER -->
     </div>
   </section>
 
@@ -487,7 +581,6 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
       <button class="nl-btn" onclick="subscribeNewsletter()">Subscribe</button>
     </div>
     <div class="nl-success" id="nlSuccess">✦ &nbsp;You're on the list. See you next week.</div>
-    <script src="https://f.convertkit.com/ckjs/ck.5.js"></script>
   </div>
 
   <footer>
@@ -587,22 +680,22 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
       </div>
     </div>
     <div class="pledge-tracker" id="pledgeTracker">
-  <div class="pledge-label">Pledged this week</div>
-  <div class="pledge-amount" id="pledgeAmount">$0</div>
-  <div class="pledge-sub" id="pledgeSub">Be the first to pledge to this week's cause</div>
-  <div class="pledge-bar-wrap"><div class="pledge-bar" id="pledgeBar"></div></div>
-</div>
-<div class="amount-grid">
-  <div class="amount-btn selected" onclick="selectAmount(this, 10)"><div class="amt">$10</div><div class="sub">small spark</div></div>
-  <div class="amount-btn" onclick="selectAmount(this, 25)"><div class="amt">$25</div><div class="sub">rising flame</div></div>
-  <div class="amount-btn" onclick="selectAmount(this, 50)"><div class="amt">$50</div><div class="sub">bright light</div></div>
-  <div class="amount-btn" onclick="selectAmount(this, 100)"><div class="amt">$100</div><div class="sub">blazing</div></div>
-</div>
-<div class="custom-amount-wrap">
-  <input class="custom-amount-input" type="number" id="customAmount" placeholder="Or enter your own amount… e.g. 35" min="1" />
-</div>
-<div class="donate-thanks" id="donateThanks">✦ Thank you for pledging! You're being taken to the charity's page to complete your donation.</div>
-<a id="donate-cta-link" href="https://msf.org" target="_blank" rel="noopener" class="donate-cta" onclick="recordPledge()" style="text-decoration:none;display:block;text-align:center;">Donate to Doctors Without Borders ♥</a>
+      <div class="pledge-label">Pledged this week</div>
+      <div class="pledge-amount" id="pledgeAmount">$0</div>
+      <div class="pledge-sub" id="pledgeSub">Be the first to pledge to this week's cause</div>
+      <div class="pledge-bar-wrap"><div class="pledge-bar" id="pledgeBar"></div></div>
+    </div>
+    <div class="amount-grid">
+      <div class="amount-btn selected" onclick="selectAmount(this, 10)"><div class="amt">$10</div><div class="sub">small spark</div></div>
+      <div class="amount-btn" onclick="selectAmount(this, 25)"><div class="amt">$25</div><div class="sub">rising flame</div></div>
+      <div class="amount-btn" onclick="selectAmount(this, 50)"><div class="amt">$50</div><div class="sub">bright light</div></div>
+      <div class="amount-btn" onclick="selectAmount(this, 100)"><div class="amt">$100</div><div class="sub">blazing</div></div>
+    </div>
+    <div class="custom-amount-wrap">
+      <input class="custom-amount-input" type="number" id="customAmount" placeholder="Or enter your own amount… e.g. 35" min="1" />
+    </div>
+    <div class="donate-thanks" id="donateThanks">✦ Thank you for pledging! You're being taken to the charity's page to complete your donation.</div>
+    <a id="donate-cta-link" href="https://msf.org" target="_blank" rel="noopener" class="donate-cta" onclick="recordPledge()" style="text-decoration:none;display:block;text-align:center;">Donate to Doctors Without Borders ♥</a>
     <div class="past-charities">
       <h3>Past weeks' causes</h3>
       <div class="past-row"><div class="past-emoji">👨‍🍳</div><div class="past-info"><div class="pname">No Kid Hungry</div><div class="pwho">Chosen by Marcus Lee · Chef</div></div><div class="past-raised">$2,340 raised</div></div>
@@ -637,7 +730,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   </div>
 </div>
 
-<!-- DYNAMIC ARTICLE PAGE (admin-published stories) -->
+<!-- DYNAMIC ARTICLE PAGE -->
 <div id="dynArticle" class="page">
   <div class="article-page">
     <button class="back-btn" onclick="showPage('stories')">← Back to stories</button>
@@ -652,9 +745,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     </div>
     <div class="article-img" id="dyn-emoji-big" style="font-size:5rem;"></div>
     <div class="article-body" id="dyn-body"></div>
-    <div class="pullquote" style="margin-top:2rem;">
-      <p id="dyn-charity-why"></p>
-    </div>
+    <div class="pullquote" style="margin-top:2rem;"><p id="dyn-charity-why"></p></div>
     <p style="font-size:0.8rem;color:var(--muted);margin-top:0.75rem;">
       Charity: <strong id="dyn-charity"></strong> · <span id="dyn-charity-url"></span>
     </p>
@@ -667,56 +758,33 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     <span style="font-size:0.7rem;font-weight:600;color:var(--terracotta);letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:0.6rem;">Share Your Story</span>
     <h1>What called you<br>to this?</h1>
     <p class="subtitle">Every profession has a story. Every story has a moment. We'd love to hear yours — whether you're a nurse, a novelist, a carpenter, or a coach. If something pulled you toward the work you do, that's a Called. story.</p>
-
     <div id="submitFormWrap">
       <div class="form-section">
         <h3><span>✦</span> About you</h3>
         <div class="field-row">
-          <div class="field">
-            <label>First &amp; Last Name</label>
-            <input type="text" placeholder="Reyna Castellanos" id="f-name" />
-          </div>
-          <div class="field">
-            <label>Where you're from</label>
-            <input type="text" placeholder="Houston, TX" id="f-location" />
-          </div>
+          <div class="field"><label>First &amp; Last Name</label><input type="text" placeholder="Reyna Castellanos" id="f-name" /></div>
+          <div class="field"><label>Where you're from</label><input type="text" placeholder="Houston, TX" id="f-location" /></div>
         </div>
         <div class="field-row">
-          <div class="field">
-            <label>Your profession / job title</label>
-            <input type="text" placeholder="Emergency Physician, Chef, Teacher…" id="f-job" />
-          </div>
+          <div class="field"><label>Your profession / job title</label><input type="text" placeholder="Emergency Physician, Chef, Teacher…" id="f-job" /></div>
           <div class="field">
             <label>Field or industry</label>
             <select id="f-field">
               <option value="" disabled selected>Select one…</option>
-              <option>Medicine &amp; Healthcare</option>
-              <option>Law &amp; Justice</option>
-              <option>Education</option>
-              <option>Technology</option>
-              <option>Arts &amp; Design</option>
-              <option>Culinary &amp; Hospitality</option>
-              <option>Science &amp; Research</option>
-              <option>Business &amp; Entrepreneurship</option>
-              <option>Trades &amp; Crafts</option>
-              <option>Social Work &amp; Nonprofit</option>
-              <option>Athletics &amp; Coaching</option>
-              <option>Other</option>
+              <option>Medicine &amp; Healthcare</option><option>Law &amp; Justice</option><option>Education</option>
+              <option>Technology</option><option>Arts &amp; Design</option><option>Culinary &amp; Hospitality</option>
+              <option>Science &amp; Research</option><option>Business &amp; Entrepreneurship</option>
+              <option>Trades &amp; Crafts</option><option>Social Work &amp; Nonprofit</option>
+              <option>Athletics &amp; Coaching</option><option>Faith &amp; Ministry</option>
+              <option>Military &amp; Service</option><option>Politics &amp; Public Service</option><option>Other</option>
             </select>
           </div>
         </div>
         <div class="field-row">
-          <div class="field">
-            <label>Email address</label>
-            <input type="email" placeholder="you@example.com" id="f-email" />
-          </div>
-          <div class="field">
-            <label>Best way to reach you (optional)</label>
-            <input type="text" placeholder="Phone, Instagram, etc." id="f-contact" />
-          </div>
+          <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com" id="f-email" /></div>
+          <div class="field"><label>Best way to reach you (optional)</label><input type="text" placeholder="Phone, Instagram, etc." id="f-contact" /></div>
         </div>
       </div>
-
       <div class="form-section">
         <h3><span>📖</span> Your story</h3>
         <div class="field">
@@ -724,48 +792,28 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
           <input type="text" placeholder="e.g. "A patient squeezed my hand and I never looked back"" id="f-title" />
           <p class="char-hint">This becomes the headline. Write it how you'd say it out loud.</p>
         </div>
-        <div class="field">
-          <label>What called you to this work?</label>
-          <textarea placeholder="Tell us the moment, the feeling, the person, the accident — whatever it was that pointed you here." id="f-calling" style="min-height:160px;"></textarea>
-        </div>
-        <div class="field">
-          <label>Is there anything else you want readers to know? (optional)</label>
-          <textarea placeholder="A detail you always leave out. Something that surprised you. Where you are now." id="f-extra"></textarea>
-        </div>
+        <div class="field"><label>What called you to this work?</label><textarea placeholder="Tell us the moment, the feeling, the person, the accident — whatever it was that pointed you here." id="f-calling" style="min-height:160px;"></textarea></div>
+        <div class="field"><label>Is there anything else you want readers to know? (optional)</label><textarea placeholder="A detail you always leave out. Something that surprised you. Where you are now." id="f-extra"></textarea></div>
       </div>
-
       <div class="form-section">
         <h3><span>♥</span> Your chosen charity</h3>
         <p style="font-size:0.88rem;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;">Every story on Called. is paired with a cause the author cares about. Our readers donate directly to the charity you choose.</p>
         <div class="field-row">
-          <div class="field">
-            <label>Charity or organization name</label>
-            <input type="text" placeholder="e.g. Doctors Without Borders" id="f-charity" />
-          </div>
-          <div class="field">
-            <label>Charity website (optional)</label>
-            <input type="text" placeholder="e.g. msf.org" id="f-charity-url" />
-          </div>
+          <div class="field"><label>Charity or organization name</label><input type="text" placeholder="e.g. Doctors Without Borders" id="f-charity" /></div>
+          <div class="field"><label>Charity website (optional)</label><input type="text" placeholder="e.g. msf.org" id="f-charity-url" /></div>
         </div>
-        <div class="field">
-          <label>Why this one? (shown alongside your story)</label>
-          <textarea placeholder="In a sentence or two — why does this cause matter to you?" id="f-charity-why"></textarea>
-        </div>
+        <div class="field"><label>Why this one? (shown alongside your story)</label><textarea placeholder="In a sentence or two — why does this cause matter to you?" id="f-charity-why"></textarea></div>
       </div>
-
       <div class="notice-box">
         <div class="notice-icon">🕐</div>
         <p><strong>We'll be in touch within one week.</strong> Every submission is read personally. If your story is a good fit, we'll reach out before anything is published. Nothing goes live without your approval.</p>
       </div>
-
       <div class="consent-row">
         <input type="checkbox" id="f-consent" />
         <label for="f-consent">I give Called. permission to publish my story and understand that the team may reach out to develop it further before anything goes live. My contact details will never be shared.</label>
       </div>
-
       <button class="submit-form-btn" id="submitBtn" onclick="submitStory()">Send My Story →</button>
     </div>
-
     <div class="submit-success" id="submitSuccess">
       <div class="big-icon">✦</div>
       <h2>Your story is on its way.</h2>
@@ -775,7 +823,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   </div>
 </div>
 
-<!-- ADMIN LOGIN OVERLAY -->
+<!-- ADMIN LOGIN -->
 <div class="admin-login" id="adminLogin">
   <div class="admin-login-box">
     <h3>Admin Access</h3>
@@ -803,11 +851,16 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     <div class="admin-2col">
       <div class="admin-field">
         <label>Field</label>
-        <select id="a-field">
+        <select id="a-field" onchange="toggleCustomField(this)">
           <option value="" disabled selected>Select one…</option>
           <option>Medicine</option><option>Law</option><option>Education</option>
-          <option>Tech</option><option>Arts</option><option>Culinary</option><option>Other</option>
+          <option>Tech</option><option>Arts</option><option>Culinary</option>
+          <option>Business</option><option>Science</option><option>Trades</option>
+          <option>Social Work</option><option>Athletics</option><option>Faith</option>
+          <option>Military</option><option>Politics</option><option>Other</option>
+          <option>Custom…</option>
         </select>
+        <input type="text" id="a-field-custom" placeholder="Type your own field…" style="display:none;margin-top:0.5rem;font-family:'DM Sans',sans-serif;font-size:0.92rem;border:1.5px solid var(--sand);border-radius:10px;padding:0.7rem 0.95rem;background:var(--cream);outline:none;width:100%;" />
       </div>
       <div class="admin-field"><label>Emoji / Icon</label><input type="text" id="a-emoji" placeholder="🩺" /></div>
     </div>
@@ -842,22 +895,20 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 </div>
 
 <script>
+// ── DONATE ──────────────────────────────────────────────
 function updateDonatePage(s) {
   if (!s) return;
   const url = s.charityUrl || s.charity_url || '';
   const fullUrl = url && !url.startsWith('http') ? 'https://' + url : url;
   const name = s.charity || s.charityName || 'Doctors Without Borders';
   const firstName = (s.name || '').split(' ')[0];
-
   document.getElementById('donate-charity-tag').textContent = firstName + '\u2019s Pick \u00b7 This Week';
   document.getElementById('donate-charity-name').textContent = name;
   document.getElementById('donate-charity-why').textContent = s.charityWhy || s.charity_why || '';
   document.getElementById('donate-charity-icon').textContent = s.emoji || '\u2665';
-
   const linkEl = document.getElementById('donate-charity-link');
   linkEl.textContent = name.toLowerCase() + (url ? ' \u00b7 ' + url : '');
   if (fullUrl) linkEl.href = fullUrl;
-
   const ctaEl = document.getElementById('donate-cta-link');
   ctaEl.textContent = 'Donate to ' + name + ' \u2665';
   if (fullUrl) ctaEl.href = fullUrl;
@@ -865,11 +916,8 @@ function updateDonatePage(s) {
 
 // ── CORE ──────────────────────────────────────────────────────────
 function newspaperClick() {
-  if (stories && stories.length > 0) {
-    openDynamicArticle(stories[0]);
-  } else {
-    showPage('article');
-  }
+  if (stories && stories.length > 0) { openDynamicArticle(stories[0]); }
+  else { showPage('article'); }
 }
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -908,9 +956,8 @@ function updatePledgeDisplay(total) {
 function loadPledgeForCharity(charityName) {
   var key = 'pledge_' + (charityName || '').toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 30);
   var total = parseInt(localStorage.getItem(key) || '0');
-  if (total > 0) {
-    updatePledgeDisplay(total);
-  } else {
+  if (total > 0) { updatePledgeDisplay(total); }
+  else {
     document.getElementById('pledgeAmount').textContent = '$0';
     document.getElementById('pledgeSub').textContent = 'Be the first to pledge to this week\'s cause';
     document.getElementById('pledgeBar').style.width = '0%';
@@ -947,28 +994,21 @@ async function subscribeNewsletter() {
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ email_address: val })
     });
-    if (res.ok || res.status === 200) {
+    if (res.ok) {
       document.getElementById('nlForm').style.display = 'none';
       document.getElementById('nlSuccess').style.display = 'flex';
     } else {
-      btn.textContent = 'Subscribe';
-      btn.disabled = false;
+      btn.textContent = 'Subscribe'; btn.disabled = false;
       alert('Something went wrong — please try again.');
     }
   } catch (err) {
-    // Kit's API blocks direct fetch due to CORS, fall back to form submit
     const form = document.createElement('form');
     form.action = 'https://app.kit.com/forms/9526096/subscriptions';
-    form.method = 'POST';
-    form.target = '_blank';
+    form.method = 'POST'; form.target = '_blank';
     const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'email_address';
-    input.value = val;
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
+    input.type = 'hidden'; input.name = 'email_address'; input.value = val;
+    form.appendChild(input); document.body.appendChild(form);
+    form.submit(); document.body.removeChild(form);
     document.getElementById('nlForm').style.display = 'none';
     document.getElementById('nlSuccess').style.display = 'flex';
   }
@@ -993,11 +1033,10 @@ function updateHeroNewspaper(d) {
   document.getElementById('np-body3').textContent = sentences[1] || '';
   document.getElementById('np-quote').textContent = '\u201c' + (d.title || body.slice(0, 80)) + '\u201d';
   const photoBox = document.getElementById('np-photo-box');
-  const photoLabel = document.getElementById('np-photo-label');
   if (d.photo) {
     photoBox.innerHTML = '<img src="' + d.photo + '" style="width:100%;height:100%;object-fit:cover;display:block;" />';
   } else {
-    photoBox.innerHTML = '<div class="np-photo-label" id="np-photo-label">' + (d.name || '') + '<br>' + (d.location || d.meta || '') + '</div>';
+    photoBox.innerHTML = '<div class="np-photo-label">' + (d.name || '') + '<br>' + (d.location || d.meta || '') + '</div>';
   }
   document.getElementById('np-photo-cap').textContent = (d.name || '') + ' \u2014 ' + (d.job || d.meta || '') + '.';
   const charityName = d.charity || d.charityName || '';
@@ -1009,7 +1048,7 @@ function updateHeroNewspaper(d) {
       '<p><strong>\u2018I Watched a Wrongful Conviction. I Knew.\u2019</strong> \u2014 Public defender Amara Osei on what it costs to be called to justice.</p>' +
       '<p><strong>\u2018Everyone Said Get a Real Job.\u2019</strong> \u2014 Creative director Juno Park on the decade she spent proving skeptics wrong.</p>';
   }
-  alsoHTML += '<p>This week\u2019s cause: <strong id="np-charity-name">' + (charityName || 'Doctors Without Borders') + '</strong>. Donate at calledstories.com/donate</p>';
+  alsoHTML += '<p>This week\u2019s cause: <strong>' + (charityName || 'Doctors Without Borders') + '</strong>. Donate at calledstories.com/donate</p>';
   document.getElementById('np-also').innerHTML = alsoHTML;
 }
 
@@ -1021,28 +1060,23 @@ async function submitStory() {
     if (!el.value.trim()) {
       el.style.borderColor = 'var(--terracotta)';
       el.scrollIntoView({ behavior:'smooth', block:'center' });
-      el.focus();
-      return;
+      el.focus(); return;
     }
     el.style.borderColor = '';
   }
   if (!document.getElementById('f-consent').checked) {
-    document.querySelector('.consent-row').style.borderColor = 'var(--terracotta)';
-    return;
+    document.querySelector('.consent-row').style.borderColor = 'var(--terracotta)'; return;
   }
-
   const fieldEmojis = {
     'Medicine & Healthcare': '🩺', 'Law & Justice': '⚖️', 'Education': '📚',
     'Technology': '💻', 'Arts & Design': '🎨', 'Culinary & Hospitality': '👨‍🍳',
     'Science & Research': '🔬', 'Business & Entrepreneurship': '💼',
     'Trades & Crafts': '🔨', 'Social Work & Nonprofit': '🤝',
-    'Athletics & Coaching': '🏅', 'Other': '✦'
+    'Athletics & Coaching': '🏅', 'Faith & Ministry': '✝️',
+    'Military & Service': '🎖️', 'Politics & Public Service': '🏛️', 'Other': '✦'
   };
-
   const btn = document.querySelector('.submit-form-btn');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-
+  btn.textContent = 'Sending…'; btn.disabled = true;
   const data = {
     _replyto:    document.getElementById('f-email').value,
     name:        document.getElementById('f-name').value,
@@ -1059,7 +1093,6 @@ async function submitStory() {
     contact:     document.getElementById('f-contact')?.value || '',
     emoji:       fieldEmojis[document.getElementById('f-field').value] || '✦',
   };
-
   try {
     const res = await fetch('https://formspree.io/f/mjgdkjgv', {
       method: 'POST',
@@ -1072,13 +1105,11 @@ async function submitStory() {
       document.getElementById('submitSuccess').style.display  = 'block';
       window.scrollTo(0, 0);
     } else {
-      btn.textContent = 'Send My Story →';
-      btn.disabled = false;
+      btn.textContent = 'Send My Story →'; btn.disabled = false;
       alert('Something went wrong — please try again.');
     }
   } catch (err) {
-    btn.textContent = 'Send My Story →';
-    btn.disabled = false;
+    btn.textContent = 'Send My Story →'; btn.disabled = false;
     alert('Network error — please check your connection and try again.');
   }
 }
@@ -1087,12 +1118,23 @@ async function submitStory() {
 const ADMIN_PASSWORD = "called2025";
 let stories = JSON.parse(localStorage.getItem('called_stories') || '[]');
 
+// Known fields for edit detection
+const KNOWN_FIELDS = ['Medicine','Law','Education','Tech','Arts','Culinary','Business','Science','Trades','Social Work','Athletics','Faith','Military','Politics','Other'];
+
+function toggleCustomField(sel) {
+  const custom = document.getElementById('a-field-custom');
+  if (sel.value === 'Custom…') {
+    custom.style.display = 'block';
+    custom.focus();
+  } else {
+    custom.style.display = 'none';
+    custom.value = '';
+  }
+}
+
 function renderAdminStoriesList() {
   const list = document.getElementById('adminStoriesList');
-  if (stories.length === 0) {
-    list.innerHTML = '<p class="admin-empty">No stories yet. Add one above.</p>';
-    return;
-  }
+  if (stories.length === 0) { list.innerHTML = '<p class="admin-empty">No stories yet. Add one above.</p>'; return; }
   list.innerHTML = stories.map((s, i) => `
     <div class="admin-story-row">
       <div style="font-size:1.5rem;">${s.emoji}</div>
@@ -1110,10 +1152,14 @@ function renderAdminStoriesList() {
 
 function adminSaveStory() {
   const idx = parseInt(document.getElementById('a-editing-index').value);
+  const fieldSel = document.getElementById('a-field').value;
+  const fieldVal = fieldSel === 'Custom…'
+    ? (document.getElementById('a-field-custom').value.trim() || 'Other')
+    : fieldSel;
   const story = {
     name:       document.getElementById('a-name').value.trim(),
     meta:       document.getElementById('a-meta').value.trim(),
-    field:      document.getElementById('a-field').value,
+    field:      fieldVal,
     emoji:      document.getElementById('a-emoji').value.trim() || '✦',
     title:      document.getElementById('a-title').value.trim(),
     body:       document.getElementById('a-body').value.trim(),
@@ -1127,15 +1173,13 @@ function adminSaveStory() {
   const file = fileInput && fileInput.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = function(e) {
-      story.photo = e.target.result;
-      _finishAdminSave(idx, story);
-    };
+    reader.onload = function(e) { story.photo = e.target.result; _finishAdminSave(idx, story); };
     reader.readAsDataURL(file);
   } else {
     _finishAdminSave(idx, story);
   }
 }
+
 function _finishAdminSave(idx, story) {
   if (idx === -1) { stories.unshift(story); }
   else { stories[idx] = story; document.getElementById('a-editing-index').value = -1; document.getElementById('adminFormTitle').textContent = '✦ Add New Story'; }
@@ -1147,7 +1191,7 @@ function _finishAdminSave(idx, story) {
     const s = stories[0];
     updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, calling: s.body, charity: s.charity, photo: s.photo });
     updateDonatePage(s);
-    loadPledgeForCharity(name);
+    loadPledgeForCharity(s.charity);
   }
 }
 
@@ -1156,16 +1200,23 @@ function adminEditStory(i) {
   document.getElementById('a-editing-index').value = i;
   document.getElementById('a-name').value        = s.name;
   document.getElementById('a-meta').value        = s.meta;
-  document.getElementById('a-field').value       = s.field;
   document.getElementById('a-emoji').value       = s.emoji;
   document.getElementById('a-title').value       = s.title;
   document.getElementById('a-body').value        = s.body;
   document.getElementById('a-charity').value     = s.charity;
   document.getElementById('a-charity-url').value = s.charityUrl;
   document.getElementById('a-charity-why').value = s.charityWhy;
-  // show existing photo hint
-  const pf = document.getElementById('a-photo');
-  if (pf) { pf.value = ''; }
+  // Handle field — custom or known
+  if (KNOWN_FIELDS.includes(s.field)) {
+    document.getElementById('a-field').value = s.field;
+    document.getElementById('a-field-custom').style.display = 'none';
+    document.getElementById('a-field-custom').value = '';
+  } else {
+    document.getElementById('a-field').value = 'Custom…';
+    document.getElementById('a-field-custom').style.display = 'block';
+    document.getElementById('a-field-custom').value = s.field;
+  }
+  const pf = document.getElementById('a-photo'); if (pf) pf.value = '';
   document.getElementById('adminFormTitle').textContent = '✏️ Editing Story';
   document.querySelector('.admin-story-form').scrollIntoView({ behavior: 'smooth' });
 }
@@ -1176,20 +1227,27 @@ function adminDeleteStory(i) {
   localStorage.setItem('called_stories', JSON.stringify(stories));
   renderAdminStoriesList();
   renderPublicStories();
+  if (stories.length > 0) {
+    const s = stories[0];
+    updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, calling: s.body, charity: s.charity, photo: s.photo });
+    updateDonatePage(s);
+  }
 }
 
 function adminClearForm() {
   ['a-name','a-meta','a-title','a-body','a-charity','a-charity-url','a-charity-why','a-emoji'].forEach(id => document.getElementById(id).value = '');
   const pf = document.getElementById('a-photo'); if (pf) pf.value = '';
   document.getElementById('a-field').selectedIndex = 0;
+  document.getElementById('a-field-custom').style.display = 'none';
+  document.getElementById('a-field-custom').value = '';
   document.getElementById('a-editing-index').value = -1;
   document.getElementById('adminFormTitle').textContent = '✦ Add New Story';
 }
 
 function renderPublicStories() {
-  if (stories.length === 0) return;
   const grid = document.getElementById('storyGrid');
   grid.querySelectorAll('.dynamic-card').forEach(c => c.remove());
+  if (stories.length === 0) return;
   stories.forEach(s => {
     const card = document.createElement('div');
     card.className = 'story-card dynamic-card';
@@ -1238,11 +1296,10 @@ function adminSignOut() {
 }
 function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
 
-// On load
+// ── ON LOAD ───────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  // Triple-click the footer "Called." logo to open admin (hidden from visitors)
-  let footerClicks = 0;
-  let footerTimer = null;
+  // Triple-click footer logo to open admin
+  let footerClicks = 0, footerTimer = null;
   const footerLogo = document.getElementById('footerLogo');
   if (footerLogo) {
     footerLogo.addEventListener('click', () => {
@@ -1255,7 +1312,6 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById('adminLogin').style.display = 'flex';
         }
       }
-    loadPledgeForCharity('Doctors Without Borders');
     });
   }
   if (sessionStorage.getItem('called_admin')) {
@@ -1265,8 +1321,11 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPublicStories();
   if (stories.length > 0) {
     const s = stories[0];
-    updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, charity: s.charity, photo: s.photo });
+    updateHeroNewspaper({ name: s.name, title: s.title, emoji: s.emoji, field: s.field, job: s.meta, location: s.meta, calling: s.body, charity: s.charity, photo: s.photo });
     updateDonatePage(s);
+    loadPledgeForCharity(s.charity);
+  } else {
+    loadPledgeForCharity('Doctors Without Borders');
   }
 });
 </script>
