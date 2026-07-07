@@ -155,6 +155,9 @@ nav { display: flex; align-items: center; justify-content: space-between; paddin
 .entry-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.5rem; }
 .entry-body  { font-size: 0.9rem; color: #5C5754; line-height: 1.65; }
 .entry-mood  { position: absolute; top: 1.2rem; right: 1.2rem; font-size: 1.1rem; }
+.entry-delete-btn { margin-top: 0.75rem; background: #FEE2E2; color: #DC2626; border: none; padding: 0.3rem 0.85rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; display: none; }
+.static-story-card { position: relative; }
+.static-story-delete { position: absolute; top: 8px; right: 8px; background: rgba(220,38,38,0.85); color: white; border: none; border-radius: 100px; font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.6rem; cursor: pointer; display: none; z-index: 10; font-family: 'DM Sans', sans-serif; }
 
 /* DONATE PAGE */
 .donate-page { padding: 3rem 2.5rem; }
@@ -622,12 +625,12 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
       <span class="filter-pill" onclick="filterStories('Culinary',this)">Culinary 👨‍🍳</span>
     </div>
     <div class="story-grid" id="storyGrid">
-      <div class="story-card" data-specialty="Medicine" onclick="showPage('article')"><div class="card-img" style="background:linear-gradient(135deg,#F9E0D4,#E8C4B8);">🩺</div><div class="card-body"><span class="card-tag">Medicine</span><div class="card-title">"A patient squeezed my hand and I never looked back"</div><div class="card-meta">Dr. Reyna Castellanos · ER Physician</div></div></div>
-      <div class="story-card" data-specialty="Culinary" onclick="showPage('article')"><div class="card-img sage-bg">👨‍🍳</div><div class="card-body"><span class="card-tag">Culinary</span><div class="card-title">"My grandmother's kitchen was my first classroom"</div><div class="card-meta">Marcus Lee · Executive Chef</div></div></div>
-      <div class="story-card" data-specialty="Law" onclick="showPage('article')"><div class="card-img sand-bg">⚖️</div><div class="card-body"><span class="card-tag">Law</span><div class="card-title">"I watched a wrongful conviction and I knew"</div><div class="card-meta">Amara Osei · Public Defender</div></div></div>
-      <div class="story-card" data-specialty="Arts" onclick="showPage('article')"><div class="card-img lavender-bg">🎨</div><div class="card-body"><span class="card-tag">Arts</span><div class="card-title">"Everyone said get a real job. I'm glad I didn't."</div><div class="card-meta">Juno Park · Creative Director</div></div></div>
-      <div class="story-card" data-specialty="Education" onclick="showPage('article')"><div class="card-img" style="background:linear-gradient(135deg,#D4E8D1,#9FE1CB);">📚</div><div class="card-body"><span class="card-tag">Education</span><div class="card-title">"My own teacher changed my life. I wanted to be that for someone."</div><div class="card-meta">Theo Williams · High School Teacher</div></div></div>
-      <div class="story-card" data-specialty="Tech" onclick="showPage('article')"><div class="card-img" style="background:linear-gradient(135deg,#DDD8F0,#AFA9EC);">💻</div><div class="card-body"><span class="card-tag">Tech</span><div class="card-title">"I built a thing that helped a million people — and still cried at my desk"</div><div class="card-meta">Sasha Kim · Product Manager</div></div></div>
+      <div class="story-card static-story-card" data-specialty="Medicine" onclick="showPage('article')"><button class="static-story-delete" onclick="deleteStaticCard(event,this)">✕</button><div class="card-img" style="background:linear-gradient(135deg,#F9E0D4,#E8C4B8);">🩺</div><div class="card-body"><span class="card-tag">Medicine</span><div class="card-title">"A patient squeezed my hand and I never looked back"</div><div class="card-meta">Dr. Reyna Castellanos · ER Physician</div></div></div>
+      <div class="story-card static-story-card" data-specialty="Culinary" onclick="showPage('article')"><button class="static-story-delete" onclick="deleteStaticCard(event,this)">✕</button><div class="card-img sage-bg">👨‍🍳</div><div class="card-body"><span class="card-tag">Culinary</span><div class="card-title">"My grandmother's kitchen was my first classroom"</div><div class="card-meta">Marcus Lee · Executive Chef</div></div></div>
+      <div class="story-card static-story-card" data-specialty="Law" onclick="showPage('article')"><button class="static-story-delete" onclick="deleteStaticCard(event,this)">✕</button><div class="card-img sand-bg">⚖️</div><div class="card-body"><span class="card-tag">Law</span><div class="card-title">"I watched a wrongful conviction and I knew"</div><div class="card-meta">Amara Osei · Public Defender</div></div></div>
+      <div class="story-card static-story-card" data-specialty="Arts" onclick="showPage('article')"><button class="static-story-delete" onclick="deleteStaticCard(event,this)">✕</button><div class="card-img lavender-bg">🎨</div><div class="card-body"><span class="card-tag">Arts</span><div class="card-title">"Everyone said get a real job. I'm glad I didn't."</div><div class="card-meta">Juno Park · Creative Director</div></div></div>
+      <div class="story-card static-story-card" data-specialty="Education" onclick="showPage('article')"><button class="static-story-delete" onclick="deleteStaticCard(event,this)">✕</button><div class="card-img" style="background:linear-gradient(135deg,#D4E8D1,#9FE1CB);">📚</div><div class="card-body"><span class="card-tag">Education</span><div class="card-title">"My own teacher changed my life. I wanted to be that for someone."</div><div class="card-meta">Theo Williams · High School Teacher</div></div></div>
+      <div class="story-card static-story-card" data-specialty="Tech" onclick="showPage('article')"><button class="static-story-delete" onclick="deleteStaticCard(event,this)">✕</button><div class="card-img" style="background:linear-gradient(135deg,#DDD8F0,#AFA9EC);">💻</div><div class="card-body"><span class="card-tag">Tech</span><div class="card-title">"I built a thing that helped a million people — and still cried at my desk"</div><div class="card-meta">Sasha Kim · Product Manager</div></div></div>
     </div>
   </div>
 </div>
@@ -637,7 +640,7 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
   <div class="journal-page">
     <h1>Founder's Journal ✦</h1>
     <p class="subtitle">My unfiltered thoughts on building Called. — the stories behind the stories.</p>
-    <div class="journal-compose">
+    <div class="journal-compose" id="journalCompose" style="display:none;">
       <input type="text" placeholder="Entry title…" id="journalTitle" />
       <textarea placeholder="Write your thoughts here…" id="journalBody"></textarea>
       <div class="compose-footer">
@@ -647,16 +650,18 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
     </div>
     <div id="journalEntries">
       <div class="entry-card">
-        <div class="entry-date">May 28, 2025</div>
-        <div class="entry-title">Why I started this</div>
-        <div class="entry-body">I was sitting across from my doctor during a routine checkup and she mentioned — almost in passing — that she almost became an architect. Something in me lit up. I wanted to know everything. The pivot, the moment, the doubt. That's when I knew Called. needed to exist. Everyone has a story about their calling, and almost no one tells it.</div>
-        <div class="entry-mood">🌱</div>
-      </div>
-      <div class="entry-card">
         <div class="entry-date">June 3, 2025</div>
         <div class="entry-title">First interview jitters</div>
         <div class="entry-body">I interviewed Dr. Reyna today for the first story. I was so nervous I spilled my coffee before we even started. She was incredibly gracious — and by the end I was genuinely moved. She cried talking about her first patient. I cried a little too. Is that okay? I think it's okay. This is working.</div>
         <div class="entry-mood">🥹</div>
+        <button class="entry-delete-btn" onclick="deleteEntry(this)">✕ Delete</button>
+      </div>
+      <div class="entry-card">
+        <div class="entry-date">May 28, 2025</div>
+        <div class="entry-title">Why I started this</div>
+        <div class="entry-body">I was sitting across from my doctor during a routine checkup and she mentioned — almost in passing — that she almost became an architect. Something in me lit up. I wanted to know everything. The pivot, the moment, the doubt. That's when I knew Called. needed to exist. Everyone has a story about their calling, and almost no one tells it.</div>
+        <div class="entry-mood">🌱</div>
+        <button class="entry-delete-btn" onclick="deleteEntry(this)">✕ Delete</button>
       </div>
     </div>
   </div>
@@ -970,7 +975,7 @@ function saveEntry() {
   const dateStr = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
   const el = document.createElement('div');
   el.className = 'entry-card';
-  el.innerHTML = `<div class="entry-date">${dateStr}</div><div class="entry-title">${title||'Untitled'}</div><div class="entry-body">${body||'…'}</div><div class="entry-mood">✍️</div>`;
+  el.innerHTML = `<div class="entry-date">${dateStr}</div><div class="entry-title">${title||'Untitled'}</div><div class="entry-body">${body||'…'}</div><div class="entry-mood">✍️</div><button class="entry-delete-btn" onclick="deleteEntry(this)" style="display:inline-block;">✕ Delete</button>`;
   document.getElementById('journalEntries').prepend(el);
   document.getElementById('journalTitle').value = '';
   document.getElementById('journalBody').value  = '';
@@ -1285,6 +1290,8 @@ function adminSignIn() {
     document.getElementById('adminBar').style.display   = 'flex';
     sessionStorage.setItem('called_admin', '1');
     renderAdminStoriesList();
+    setJournalAdminMode(true);
+    setStaticDeleteMode(true);
   } else {
     document.getElementById('adminLoginError').style.display = 'block';
   }
@@ -1293,7 +1300,34 @@ function adminSignOut() {
   sessionStorage.removeItem('called_admin');
   document.getElementById('adminBar').style.display   = 'none';
   document.getElementById('adminPanel').style.display = 'none';
+  setJournalAdminMode(false);
+  setStaticDeleteMode(false);
 }
+function setJournalAdminMode(isAdmin) {
+  const compose = document.getElementById('journalCompose');
+  if (compose) compose.style.display = isAdmin ? 'block' : 'none';
+  document.querySelectorAll('.entry-delete-btn').forEach(b => {
+    b.style.display = isAdmin ? 'inline-block' : 'none';
+  });
+}
+
+function setStaticDeleteMode(isAdmin) {
+  document.querySelectorAll('.static-story-delete').forEach(b => {
+    b.style.display = isAdmin ? 'block' : 'none';
+  });
+}
+
+function deleteEntry(btn) {
+  if (!confirm('Delete this journal entry?')) return;
+  btn.closest('.entry-card').remove();
+}
+
+function deleteStaticCard(event, btn) {
+  event.stopPropagation();
+  if (!confirm('Remove this story card? This only hides it until the page reloads.')) return;
+  btn.closest('.story-card').remove();
+}
+
 function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
 
 // ── ON LOAD ───────────────────────────────────────────────────────
@@ -1317,6 +1351,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sessionStorage.getItem('called_admin')) {
     document.getElementById('adminBar').style.display = 'flex';
     renderAdminStoriesList();
+    setJournalAdminMode(true);
+    setStaticDeleteMode(true);
   }
   renderPublicStories();
   if (stories.length > 0) {
