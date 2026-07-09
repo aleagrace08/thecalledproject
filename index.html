@@ -920,6 +920,31 @@ footer { background: var(--ink); color: var(--cream); padding: 2.5rem; display: 
 </div>
 
 <script>
+// ── SUPABASE REST ─────────────────────────────────────────────────
+const SUPABASE_URL = 'https://zdkwbtenfokewxxfeysz.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_QFyHVhKLOiC3tBeOcZ68lw_YAHQJcyq';
+
+async function sbFetch(table, options = {}) {
+  const { method = 'GET', filter = '', body = null, select = '*', order = '' } = options;
+  let url = SUPABASE_URL + '/rest/v1/' + table + '?select=' + select;
+  if (filter) url += '&' + filter;
+  if (order) url += '&order=' + order;
+  const headers = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_KEY,
+    'Content-Type': 'application/json',
+    'Prefer': method === 'POST' ? 'return=representation' : 'return=minimal'
+  };
+  const opts = { method, headers };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(url, opts);
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(err);
+  }
+  if (method === 'GET') return res.json();
+  return null;
+}
 // ── DONATE ──────────────────────────────────────────────
 function updateDonatePage(s) {
   if (!s) return;
@@ -998,19 +1023,19 @@ function updateConsentState() {
     document.getElementById('consent-error').style.display = 'none';
   }
 }
-function saveEntry() {
+async function saveEntry() {
   const title = document.getElementById('journalTitle').value.trim();
   const body  = document.getElementById('journalBody').value.trim();
   if (!title && !body) return;
   const dateStr = new Date().toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' });
   const id = 'je_' + Date.now();
   const entry = { id, title: title || 'Untitled', body: body || '…', date: dateStr, mood: '✍️' };
-  const entries = JSON.parse(localStorage.getItem('journal_entries') || '[]');
-  entries.unshift(entry);
-  localStorage.setItem('journal_entries', JSON.stringify(entries));
-  renderJournalEntry(entry, true);
-  document.getElementById('journalTitle').value = '';
-  document.getElementById('journalBody').value  = '';
+  try {
+    await sbFetch('journal_entries', { method: 'POST', body: entry });
+    renderJournalEntry(entry, true);
+    document.getElementById('journalTitle').value = '';
+    document.getElementById('journalBody').value  = '';
+  } catch(e) { alert('Error saving entry: ' + e.message); }
 }
 
 function renderJournalEntry(entry, prepend) {
@@ -1024,9 +1049,11 @@ function renderJournalEntry(entry, prepend) {
   else container.appendChild(el);
 }
 
-function loadJournalEntries() {
-  const entries = JSON.parse(localStorage.getItem('journal_entries') || '[]');
-  entries.forEach(e => renderJournalEntry(e, false));
+async function loadJournalEntries() {
+  try {
+    const data = await sbFetch('journal_entries', { order: 'created_at.desc' });
+    (data || []).forEach(e => renderJournalEntry(e, false));
+  } catch(e) { console.error('Error loading journal:', e.message); }
 }
 function filterStories(specialty, pill) {
   document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
@@ -1173,7 +1200,7 @@ async function submitStory() {
 
 // ── ADMIN ─────────────────────────────────────────────────────────
 const ADMIN_PASSWORD = "called2025";
-let stories = JSON.parse(localStorage.getItem('called_stories') || '[]');
+let stories = [];
 
 // Known fields for edit detection
 const KNOWN_FIELDS = ['Medicine','Law','Education','Tech','Arts','Culinary','Business','Science','Trades','Social Work','Athletics','Faith','Military','Politics','Other'];
@@ -1221,8 +1248,8 @@ function adminSaveStory() {
     title:      document.getElementById('a-title').value.trim(),
     body:       document.getElementById('a-body').value.trim(),
     charity:    document.getElementById('a-charity').value.trim(),
-    charityUrl: document.getElementById('a-charity-url').value.trim(),
-    charityWhy: document.getElementById('a-charity-why').value.trim(),
+    charity_url: document.getElementById('a-charity-url').value.trim(),
+    charity_why: document.getElementById('a-charity-why').value.trim(),
     photo:      (idx !== -1 && stories[idx]) ? (stories[idx].photo || '') : '',
   };
   if (!story.name || !story.title || !story.body) { alert('Name, title, and story body are required.'); return; }
@@ -1237,10 +1264,21 @@ function adminSaveStory() {
   }
 }
 
-function _finishAdminSave(idx, story) {
-  if (idx === -1) { stories.unshift(story); }
-  else { stories[idx] = story; document.getElementById('a-editing-index').value = -1; document.getElementById('adminFormTitle').textContent = '✦ Add New Story'; }
-  localStorage.setItem('called_stories', JSON.stringify(stories));
+async function _finishAdminSave(idx, story) {
+  try {
+    if (idx === -1) {
+      story.id = 'story_' + Date.now();
+      await sbFetch('stories', { method: 'POST', body: story });
+      stories.unshift(story);
+    } else {
+      const existingId = stories[idx].id;
+      story.id = existingId;
+      await sbFetch('stories', { method: 'PATCH', filter: 'id=eq.' + existingId, body: story });
+      stories[idx] = story;
+      document.getElementById('a-editing-index').value = -1;
+      document.getElementById('adminFormTitle').textContent = '✦ Add New Story';
+    }
+  } catch(e) { alert('Error saving story: ' + e.message); return; }
   renderAdminStoriesList();
   renderPublicStories();
   adminClearForm();
@@ -1261,9 +1299,8 @@ function adminEditStory(i) {
   document.getElementById('a-title').value       = s.title;
   document.getElementById('a-body').value        = s.body;
   document.getElementById('a-charity').value     = s.charity;
-  document.getElementById('a-charity-url').value = s.charityUrl;
-  document.getElementById('a-charity-why').value = s.charityWhy;
-  // Handle field — custom or known
+  document.getElementById('a-charity-url').value = s.charity_url || s.charityUrl || '';
+  document.getElementById('a-charity-why').value = s.charity_why || s.charityWhy || '';
   if (KNOWN_FIELDS.includes(s.field)) {
     document.getElementById('a-field').value = s.field;
     document.getElementById('a-field-custom').style.display = 'none';
@@ -1278,10 +1315,13 @@ function adminEditStory(i) {
   document.querySelector('.admin-story-form').scrollIntoView({ behavior: 'smooth' });
 }
 
-function adminDeleteStory(i) {
+async function adminDeleteStory(i) {
   if (!confirm('Delete this story? This cannot be undone.')) return;
+  const id = stories[i].id;
+  try {
+    await sbFetch('stories', { method: 'DELETE', filter: 'id=eq.' + id });
+  } catch(e) { alert('Error deleting story: ' + e.message); return; }
   stories.splice(i, 1);
-  localStorage.setItem('called_stories', JSON.stringify(stories));
   renderAdminStoriesList();
   renderPublicStories();
   if (stories.length > 0) {
@@ -1330,8 +1370,8 @@ function openDynamicArticle(s) {
   document.getElementById('dyn-emoji-big').textContent = s.emoji;
   document.getElementById('dyn-body').innerHTML       = s.body.split('\n\n').map(p => `<p>${p}</p>`).join('');
   document.getElementById('dyn-charity').textContent  = s.charity;
-  document.getElementById('dyn-charity-url').textContent = s.charityUrl;
-  document.getElementById('dyn-charity-why').textContent = s.charityWhy;
+  document.getElementById('dyn-charity-url').textContent = s.charity_url || s.charityUrl || '';
+  document.getElementById('dyn-charity-why').textContent = s.charity_why || s.charityWhy || '';
   showPage('dynArticle');
 }
 
@@ -1369,14 +1409,14 @@ function setStaticDeleteMode(isAdmin) {
   });
 }
 
-function deleteEntry(btn) {
+async function deleteEntry(btn) {
   if (!confirm('Delete this journal entry?')) return;
   const card = btn.closest('.entry-card');
   const jid = card.dataset.jid;
   if (jid) {
-    const entries = JSON.parse(localStorage.getItem('journal_entries') || '[]');
-    const updated = entries.filter(e => e.id !== jid);
-    localStorage.setItem('journal_entries', JSON.stringify(updated));
+    try {
+      await sbFetch('journal_entries', { method: 'DELETE', filter: 'id=eq.' + jid });
+    } catch(e) { alert('Error deleting entry: ' + e.message); return; }
   }
   card.remove();
 }
@@ -1402,7 +1442,7 @@ function applyHiddenStaticCards() {
 function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
 
 // ── ON LOAD ───────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   // Triple-click footer logo to open admin
   let footerClicks = 0, footerTimer = null;
   const footerLogo = document.getElementById('footerLogo');
@@ -1419,9 +1459,23 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Load stories from Supabase
+  try {
+    const sbStories = await sbFetch('stories', { order: 'created_at.desc' });
+    if (sbStories) {
+      stories = sbStories.map(s => ({
+        ...s,
+        charityUrl: s.charity_url || '',
+        charityWhy: s.charity_why || '',
+      }));
+    }
+  } catch(e) { console.error('Error loading stories:', e.message); }
+
   renderPublicStories();
   applyHiddenStaticCards();
-  loadJournalEntries();
+  await loadJournalEntries();
+
   if (sessionStorage.getItem('called_admin')) {
     document.getElementById('adminBar').style.display = 'flex';
     renderAdminStoriesList();
